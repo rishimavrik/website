@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mavrik Demo – Horizontal Scroll with Snap</title>
+  <style>
+    /* Smooth scrolling for anchor jumps */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Reset & base sizing */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      font-family: "PPmono", monospace; 
+      font-size: 16px; /* Base for clamp calculations */
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* Custom font faces (optional) */
+    @font-face {
+      font-family: 'EuropaGroSHOP';
+      src: url('./comps/EuropaGroSHOP-Med.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "PPmono";
+      src: url("./comps/PPSupplyMono-Regular.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "PPmono";
+      src: url("./comps/fonts/PPSupplyMono-Ultralight.otf") format("opentype");
+      font-weight: 200;
+      font-style: normal;
+    }
+
+    /* Horizontal container (side-by-side pages) + snap */
+    .horizontal-scroll-wrapper {
+      display: flex;
+      flex-direction: row;
+      width: 100vw;
+      height: 100vh;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      position: relative;
+    }
+
+    /* Each "page" occupies the full viewport and snaps */
+    .page {
+      flex: 0 0 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 2rem;
+      position: relative;
+      scroll-snap-align: start;
+    }
+
+    /* Background colors */
+    .page-1 { background-color: #ffffff; color: #000000; }
+    .page-2 { background-color: #f5f5f5; color: #111111; }
+    .page-3 { background-color: #ffffff; color: #000000; }
+    .page-4 { background-color: #f5f5f5; color: #111111; }
+    .page-5 { background-color: #ffffff; color: #000000; }
+
+    /*
+      Container styling
+      Updated to use flex for vertical layout
+      and align items to center horizontally.
+    */
+    .container {
+      width: 80%;
+      max-width: 60rem; /* ~960px if 1rem = 16px */
+      margin: 0 auto;   /* center the container horizontally */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* center child elements horizontally */
+    }
+
+    /* UNIVERSAL TEXT SIZES WITH EVEN SMALLER MINIMUMS */
+    h2 {
+      font-size: clamp(1rem, 3vw, 2.25rem);
+      margin: 1rem 0;
+    }
+    p {
+      font-size: clamp(0.625rem, 1.2vw, 1.125rem);
+      margin: 0;
+      padding: 0;
+    }
+    .centered-top-button {
+      background: none;
+      border: none;
+      position: absolute;
+      top: clamp(4rem,10vh,20rem); /* Adjust this value to set the distance from the top */
+      left: 49.3%;
+      transform: translateX(-50%);
+    }
+
+    /* Logo row */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin: 0 auto 0 auto; /* centers the logo row block */
+      transform: translateX(0);
+    }
+    .mavrik-logo {
+      width: clamp(6rem, 18vw, 16rem);
+      height: auto;
+    }
+    .bat-logo {
+      width: clamp(5rem, 12vw, 10rem);
+      height: auto;
+    }
+    .bat-logo-small {
+      width: clamp(3rem, 8vw, 6rem);
+      height: auto;
+      margin-top: 1rem;
+    }
+
+    /*
+      Home page subtitle text
+      Kept text-align: left while
+      margin: 0 auto centers the block
+      under the logo row.
+    */
+    .subtitle {
+      font-size: clamp(0.75rem, 2vw, 1.5rem);
+      line-height: 1.2;
+      max-width: 37.5rem; /* ~600px */
+      margin: 0 auto 5rem auto; /* center the subtitle block horizontally */
+      text-align: left;         /* left-align the text inside */
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      margin-top: 7rem;
+    }
+    .bottom-nav a {
+      font-size: clamp(0.75rem, 2vw, 1.25rem);
+      color: inherit;
+      text-decoration: none;
+      font-weight: inherit;
+      margin-right: 0rem;
+    }
+    .bottom-nav a:hover,
+    .bottom-nav a:focus {
+      text-decoration: underline;
+    }
+
+    /* Corner content (left side) */
+    .corner-content {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      width: clamp(6rem, 18vw, 16rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centers child elements (logo + text) horizontally */
+    }
+    .corner-logo {
+      margin-bottom: 1rem; /* some spacing between the logo and text */
+    }
+    .center-top-logo {
+      width: clamp(10rem, 25vw, 35rem);
+      height: auto;
+    }
+    .corner-text p {
+      font-size: clamp(0.5rem, 1vw, .85rem);
+      text-align: left;
+      max-width: 13.75rem;
+    }
+
+    /* Button look */
+    .corner-button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    /* Shared nav button style */
+    .nav-button {
+      font-size: clamp(0.75rem, 2vw, 1.25rem);
+      position: absolute;
+      bottom: 2rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .nav-button:hover,
+    .nav-button:focus {
+      text-decoration: underline;
+    }
+    .nav-button-left {
+      left: clamp(12rem, 25vw, 35rem);
+      bottom: 5rem; /* Adjust this value to move the button farther from the bottom */
+    }
+
+    .nav-button-right {
+      right: 4rem;
+      bottom: 5rem; /* Adjust this value to move the button farther from the bottom */
+    }
+
+    .nav-button-left-spec {
+      left: 4rem;
+      bottom: 5rem;
+    }
+
+    /* -----------------------------------
+       NOMAD PAGE-SPECIFIC STYLES
+    ----------------------------------- */
+    .nomad-title-block {
+      position: absolute;
+      top: 8vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nomad-title {
+      font-family: 'EuropaGroSHOP', sans-serif;
+      font-size: clamp(1.5rem, 10vw, 10rem);
+      margin: 0;
+      text-align: center;
+    }
+    .nomad-subtitle {
+      font-family: 'EuropaGroSHOP', sans-serif;
+      font-size: clamp(1rem, 5vw, 4rem);
+      margin-right: 10rem;
+      text-align: right;
+    }
+
+    .nomad-stats {
+      font-size: clamp(0.75rem, 2vw, 1.25rem);
+      position: absolute;
+      top: 41%;
+      left: 6vw;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    .nomad-stats-right {
+      font-size: clamp(0.75rem, 2vw, 1.25rem);
+      position: absolute;
+      top: 43%;
+      right: 6vw;
+      transform: translateY(-50%);
+      text-align: right;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+    .brace-icon {
+      width: clamp(0.25rem, 1vw, 0.5rem);
+      height: auto;
+    }
+    .center-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: clamp(150px, 50vw, 900px);
+      height: auto;
+      z-index: 1;
+      animation: bobbing 1s infinite steps(2, end);
+    }
+    .center-image-placeholder {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: clamp(130px, 45vw, 750px);
+      height: auto;
+      z-index: 1;
+    }
+
+
+    @keyframes fadeblink {
+      0% {
+        color: rgba(0, 0, 0, 1);
+      }
+      50% {
+        color: rgba(0, 0, 0, 0.139);
+      }
+      100% {
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+
+    /* -----------------------------------
+       DRONE (HATCHET) UNIVERSAL STYLES
+    ----------------------------------- */
+    .drone-title-block {
+      position: absolute;
+      top: 5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+    }
+    .drone-title {
+      width: clamp(30rem, 65vw, 120rem);
+      height: auto;
+      margin-top: 5vh;
+    }
+    .drone-subtitle {
+      font-size: clamp(1rem, 5vw, 4rem);
+      text-align: right;
+    }
+    .drone-stats {
+      font-size: clamp(0.75rem, 2vw, 1.25rem);
+      position: absolute;
+      top: 43%;
+      left: 6vw;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    .drone-stats-right {
+      font-size: clamp(0.75rem, 2vw, 2.25rem);
+      position: absolute;
+      top: 43%;
+      right: 6vw;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    .corner-content-right {
+      position: absolute;
+      bottom: 15vh;  /* 15% of the viewport height */
+      right: 6vw;   /* 6% of the viewport width */
+      text-align: right;
+    }
+    .corner-content-right p {
+  white-space: nowrap;
+  }
+    .header-readme {
+    font-size: clamp(2rem, 5vw, 5rem); /* Dynamic font size */
+    text-align: center;
+    top: clamp(-2rem, -4vh, -4rem); /* Adjust this value to move it up */
+    margin-top: clamp(-10rem, -20vw, -20rem); /* Adjust this value to move it up */
+    margin-bottom: clamp(4.5rem, 9vh, 9rem); /* Dynamic margin-bottom */
+    color: #000;
+  }
+  
+    /* Bobbing animation for center images */
+    @keyframes bobbing {
+      0%   { transform: translate(-50%, -50%); }
+      25%  { transform: translate(-50%, calc(-50% - var(--half-random-px))); }
+      50%  { transform: translate(-50%, calc(-50% - var(--random-px))); }
+      75%  { transform: translate(-50%, calc(-50% - var(--half-random-px))); }
+      100% { transform: translate(-50%, -50%); }
+    }
+
+    /* Blinking for "COMPLETE" */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0; }
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    /* Dots blinking for "IN PROGRESS" */
+    @keyframes dot-blink {
+      0%   { opacity: 0; }
+      33%  { opacity: 1; }
+      66%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .dot-1 {
+      animation: dot-blink 1.5s infinite;
+      font-size: 1.2rem;
+      margin: -.3rem;
+    }
+    .dot-2 {
+      animation: dot-blink 1.5s infinite 0.5s;
+      font-size: 1.2rem;
+      margin: -.3rem;
+    }
+    .dot-3 {
+      animation: dot-blink 1.5s infinite 1s;
+      font-size: 1.2rem;
+      margin: -.3rem;
+    }
+    .center-text-placeholder p
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-size: clamp(2rem, 10vw, 10rem);
+  text-align: center;
+  animation: fadeblink 3s linear infinite;
+}
+.time-style {
+    font-size: clamp(0.75rem, 2vw, 4rem);
+  }
+
+    /* --------------------------------------------------------------------
+       TEAM PAGE (PAGE 4) STYLES – RESPONSIVE, CLAMP-BASED LAYOUT
+    -------------------------------------------------------------------- */
+    .team-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(.5rem, 2vw, 2rem);
+      width: 80%;
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: clamp(.5rem, 2vw, 2rem);
+    }
+    .team-list {
+      flex: 1;
+    }
+    .team-list.team-list-left {
+      text-align: left;
+    }
+    .team-list.team-list-right {
+      text-align: right;
+    }
+    .team-list ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .team-list li {
+      font-family: 'EuropaGroSHOP', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      cursor: pointer;
+      margin: clamp(0.5rem, 1vw, 1rem) 0;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    .team-list li:hover {
+      color: #555;
+    }
+    .team-list li .small-icon {
+      display: none;
+    }
+    .team-hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: clamp(100px, 35vh, 320px);
+  text-align: center;
+}
+    .hover-display {
+      padding: clamp(0.25rem, 1vw, 1rem);
+      border-radius: 0.5rem;
+      z-index: 1;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+    .hover-display img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+    .hover-display h3 {
+      margin: clamp(0.25rem, 1vw, 0.75rem) 0;
+    }
+    .hover-display p {
+      margin: 0;
+      font-size: clamp(0.4rem, 1.5vw, 1rem);
+    }
+    .investor-info {
+      position: absolute; 
+      bottom: clamp(2rem, 8vw, 8rem);
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-family: "PPmono", monospace;
+      font-size: clamp(0.25rem, 1.2vw, 1rem);
+      line-height: 1;
+    }
+    .investor-info p {
+      margin: clamp(0.15rem, 0.5vw, 0.3rem) 0;
+    }
+    .investor-button {
+      color: black;               
+      background: none;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+    }
+    .social-button {
+      color: black;               
+      background: none;
+      border: none;
+      text-decoration: underline;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* --------------------------------------------------------------------
+       README PAGE – SCROLLABLE LIST STYLES
+    -------------------------------------------------------------------- */
+    .scrollable-list {
+      height: 210px;
+      width: 75vw;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;     /* Firefox */
+      position: relative;
+    }
+    .scrollable-list::-webkit-scrollbar {
+      display: none;             /* Chrome, Safari, Opera */
+    }
+    /* Add extra space at the top and bottom so the first and last items can center */
+    .scrollable-list::before,
+    .scrollable-list::after {
+      content: "";
+      display: block;
+      height: 80px;
+      flex-shrink: 0;
+    }
+    .list-item {
+      height: 70px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .list-item.active {
+      color: #000;
+    }
+    .list-item:not(.active) {
+      transform: scale(.99);
+      color: #aaa;
+    }
+    .list-item-title h3 {
+      margin: 0;
+      margin-right: 0rem;
+      font-size: 2.78vw;
+      text-align: left;
+      font-family: 'EuropaGroSHOP', sans-serif;
+      font-weight: normal;
+    }
+    .list-item-subtitles {
+      text-align: right;
+      font-size: 0.97vw;
+      line-height: 1.2;
+    }
+    .list-item-subtitles p {
+      margin: 0;
+    }
+    /* Remove default button styling for list items while keeping the same look */
+    .scrollable-list button.list-item {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      display: flex;
+      width: 75vw;
+    }
+
+    /* --------------------------------------------------------------------
+       README PAGE – README CONTENT LAYOUT WITH IMAGE
+    -------------------------------------------------------------------- */
+    .readme-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .readme-image {
+      flex: 0 0 auto;
+    }
+    .readme-image img {
+      width: 23px;
+      margin-top: -5px;
+      height: auto;
+      transition: transform 0.3s ease-out;
+      transform: scale(1);
+    }
+
+
+
+
+    /*------------------------------------------------------------------------------------------------------------------ */
+    @media (max-width: 765px) {
+  /* Allow vertical scrolling on mobile devices */
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  /* Change the scroll container to use vertical layout */
+  .horizontal-scroll-wrapper {
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        scroll-snap-type: y mandatory;
+        overflow-y: auto;
+      }
+  /* Adjust each page to fill the viewport vertically */
+  .page {
+    flex: 0 0 100vh;
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+  }
+
+
+  .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 0 auto 0 auto; /* centers the logo row block */
+      transform: translateX(0);
+    }
+
+    .mavrik-logo {
+      width: 45vw;
+      height: auto;
+    }
+    .bat-logo {
+      width: 10vh;
+      height: auto;
+    }
+    .subtitle p{
+      font-size: clamp(0.75rem, 1.3vh, 2rem);
+      margin: 0 auto 1rem auto; /* center the subtitle block horizontally */
+      text-align: left;         /* left-align the text inside */
+    }
+
+  .bottom-nav {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;  
+    text-decoration: underline;  /* Optional: center items horizontally */
+  }
+
+  .bottom-nav span {
+    display: none;          /* Hide the arrow spans */
+  }
+
+  .bottom-nav a {
+    margin: 0.5rem 0;       /* Optional: add vertical spacing between links */
+  }
+
+
+
+.corner-content {
+  width: 35vw;
+  left: 5vw;
+  bottom: 15vh;
+}
+.corner-logo{
+  width: 40vw;
+}
+.corner-text p{
+  font-size:  2vw;
+  text-align: left;
+}
+  .center-image {
+    max-width: clamp(150px, 80vw, 1000px);
+    top: 30%;
+    left: 8%;
+    transform: rotate(10deg);
+    animation: none;
+  }
+
+  .nav-button-left {
+    left: 5vw;
+    bottom: 4%; /* Adjust this value to move the button farther from the bottom */
+  }
+  .nav-button-right {
+    right: 5vw;
+    bottom: 4%; /* Adjust this value to move the button farther from the bottom */
+  }
+  .nav-button-left-spec{
+  left: 5vw;
+  bottom: 4%;
+}
+
+
+
+
+
+  .nomad-title {
+    font-size: 13vw;
+    margin: 0;
+    text-align: center;
+  }
+  .nomad-subtitle{
+    display: none;
+  }
+  .nomad-stats-right{
+    display: none;
+  }
+  /* Hide the original text */
+  .nomad-stats p {
+    visibility: hidden;
+  }
+  .corner-content-right {
+    top: 25vh;
+  }
+  
+  /* Insert new multi-line text using ::after */
+  .nomad-stats::after {
+    content: "NOMAD\A/ˈnōˌmad/\A<A wanderer>\A\A" 
+             "MAVRIK’s first\A"
+             "Passenger Vehicle\A\A"
+             "Built to prove concept of low-cost EVTOL vehicles built for passenger transport";
+    white-space: pre-line; /* Makes \A line breaks work */
+    position: absolute;
+    left: 20%;
+    top: 100%;
+    text-align: left;
+    font-size: 2vw;  /* Adjust font size as needed */
+    color: inherit;  /* Inherit text color */
+  }
+
+
+  .drone-title{
+    width: 95%;
+    height: auto;
+    margin-top: 10vh;
+  }
+  .time-style {
+    font-size: 8vw;
+    top: 0;
+  }
+  .drone-stats-right {
+    top: 5vh;         /* Move it closer to the top */
+    left: 0;
+    right: 0;
+    transform: none;  /* Remove the vertical translation */
+    text-align: center;
+  }
+  .drone-stats{
+    display: none;
+  }
+  .center-text-placeholder p{
+    font-size: 10vh;
+  }
+
+  .team-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Make each team section full width (or adjust as needed) */
+  .team-list,
+  .team-hover {
+    width: 100%;
+  }
+
+  /* Set the order so the left team list is on top, the center hover in the middle, and the right team list at the bottom */
+  
+  .team-list.team-list-left {
+    order: 2;
+    text-align: center;
+  }
+  .team-hover {
+    order: 1;
+  }
+  .team-list.team-list-right {
+    display: none;
+  }
+  .hover-display img {
+      max-width: 50%;
+      height: auto;
+      margin-bottom: 5vh;
+    }
+  .center-top-logo {
+    width: 45vw;
+    margin-top: 10vh;
+    height: auto;
+  }
+  .investor-info{
+    bottom: 17vh;
+  }
+
+.readme-image{
+  display: none;
+}
+
+
+
+
+}
+/*------------------------------------------------------------------------------------------------------------------ */
+
+
+  </style>
+</head>
+<body>
+  <div class="scale-wrapper">
+    <div class="horizontal-scroll-wrapper">
+      <!-- Page 1: HOME -->
+      <div class="page page-1" id="home">
+        <div class="container">
+          <div class="logo-row">
+            <img src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIK Wordmark" class="mavrik-logo" />
+            <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo" />
+          </div>
+          <div class="subtitle">
+            <p>\\\\\\\<br>
+               Next-Gen Transport &amp; Cargo Logistics<br>
+               Built for Real-World Impact</p>
+            <br>
+            <p>Solving the ‘Golden Hour’ problem<br>
+               Winning Contested Logistics<br>
+               Fighting Wildfires</p>
+          </div>
+          <div class="bottom-nav">
+            <a href="#nomad">NOMAD</a><span> -----------></span>
+            <a href="#hatchet">HATCHET</a><span> -----------></span>
+            <a href="#team">TEAM</a><span> -----------></span>
+            <a href="#readme">README</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2: NOMAD -->
+      <div class="page page-2" id="nomad">
+        <img src="./comps/nomad.png" alt="Large Nomad Center Image" class="center-image" />
+        <div class="nomad-title-block">
+          <div class="nomad-title">THE NOMAD</div>
+          <div class="nomad-subtitle">MK-VIII</div>
+        </div>
+        <div class="nomad-stats">
+          <p>
+            /ˈnōˌmad/<br>
+            &lt;A wanderer&gt;<br><br>
+            MAVRIK’s first Passenger<br>
+            vehicle - Built to prove the <br>
+            concept of low-cost EVTOL <br>
+            vehicles for human <br>
+            transport
+          </p>
+        </div>
+        <div class="nomad-stats-right">
+          <p>
+            Specs:<br><br><br>
+            Range = 20mi<br>
+            Payload Capacity = 200lb<br>
+            Autonomy = SEMI
+          </p>
+        </div>
+        <div class="corner-content">
+          <button class="corner-button" onclick="goToPage('home')">
+            <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIK Wordmark" class="corner-logo" />
+          </button>
+          <div class="corner-text" id="cornerTextContent">
+            <p>
+              © 2024 By Mavrik Inc<br><br>
+              Independently owned/operated<br><br>
+              Mavrik, Inc<br>
+              3355 E Spring St<br>
+              Long Beach, CA 90806<br>
+              United States of America<br>
+            </p>
+          </div>
+        </div>
+        <div class="corner-content-right">
+          <p>
+            BUILD STATUS: <span class="blink">COMPLETE</span><br>
+          </p>
+          <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
+        </div>
+        <button class="nav-button nav-button-left" onclick="goToPage('home')">
+          &lt;&lt;&lt; BACK
+        </button>
+        <button class="nav-button nav-button-right" onclick="goToPage('hatchet')">
+          HATCHET &gt;&gt;&gt;
+        </button>
+      </div>
+
+      <!-- Page 3: HATCHET -->
+      <div class="page page-3" id="hatchet">
+        <div class="center-text-placeholder">
+          <p>COMING SOON</p>
+        </div>
+        <div class="drone-title-block">
+          <img src="./comps/HATCHET.svg" alt="Large Hatchet Title" class="drone-title" />
+        </div>
+        <div class="drone-stats">
+          <p>
+            /ˈhaCHət/<br>
+            &lt;A versatile survival tool&gt;<br><br>
+            MAVRIK’s first production <br>
+            vehicle Disrupts current <br>
+            contested logistics <br>
+            market. Designed with <br>
+            complete autonomy and <br>
+            heavy lift power. <br>
+          </p>
+        </div>
+        <div class="drone-stats-right">
+          <div id="countdown" class="time-style">(0:00:00)</div>
+        </div>
+        <div class="corner-content">
+          <button class="corner-button" onclick="goToPage('home')">
+            <img id="cornerLogoImageHatchet" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIK Wordmark" class="corner-logo" />
+          </button>
+          <div class="corner-text">
+            <p>
+              © 2024 By Mavrik Inc<br><br>
+              Independently owned/operated<br><br>
+              Mavrik, Inc<br>
+              3355 E Spring St<br>
+              Long Beach, CA 90806<br>
+              United States of America<br>
+            </p>
+          </div>
+        </div>
+        <div class="corner-content-right">
+          <p>BUILD STATUS: IN PROGRESS
+            <span class="dot-1">.</span>
+            <span class="dot-2">.</span>
+            <span class="dot-3">.</span>
+          </p>
+          <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
+        </div>
+        <button class="nav-button nav-button-left" onclick="goToPage('nomad')">
+          &lt;&lt;&lt; BACK
+        </button>
+        <button class="nav-button nav-button-right" onclick="goToPage('team')">
+          TEAM &gt;&gt;&gt;
+        </button>
+      </div>
+
+      <!-- Page 4: TEAM -->
+      <div class="page page-4" id="team">
+        <button class="centered-top-button" onclick="goToPage('home')">
+          <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIk Wordmark" class="center-top-logo" />
+        </button>
+        <button class="nav-button nav-button-left-spec" onclick="goToPage('hatchet')">
+          &lt;&lt;&lt; BACK
+        </button>
+        <button class="nav-button nav-button-right" onclick="goToPage('readme')">
+          README &gt;&gt;&gt;
+        </button>
+        <div class="team-container">
+          <!-- Left team list: Existing members -->
+          <div class="team-list team-list-left">
+            <ul>
+              <li data-img="./comps/maxowens.png" data-name="Max Owens (21)" data-title="CEO" data-desc="Cornell University">
+                MAX OWENS
+              </li>
+              <li data-img="./comps/tim_huntzinger.jpg" data-name="Tim Huntzinger" data-title="COO" data-desc="Some University">
+                TIM HUNTZINGER
+              </li>
+              <li data-img="./comps/ryan_ellis.jpg" data-name="Ryan Ellis" data-title="Lead Engineer" data-desc="Some University">
+                RYAN ELLIS
+              </li>
+              <li data-img="./comps/jt_klenke.jpg" data-name="JT Klenke" data-title="Designer" data-desc="Some University">
+                JT KLENKE
+              </li>
+              <li data-img="./comps/rishi_mannava.jpg" data-name="Rishi Mannava" data-title="Software Dev" data-desc="Some University">
+                RISHI MANNAVA
+              </li>
+            </ul>
+          </div>
+          <!-- Center hover popup -->
+          <div class="team-hover">
+            <div class="hover-display" id="hoverDisplay">
+              <img id="hoverDisplayImg" src="./comps/MAVRIKLogo.png" alt="Team Member" />
+              <h3 id="hoverDisplayName"></h3>
+              <p id="hoverDisplayDesc"></p>
+            </div>
+          </div>
+          <!-- Right team list: New members -->
+          <div class="team-list team-list-right">
+            <ul>
+              <li data-img="./comps/MAVRIKLogo.png" data-name="JOEL BEAM" data-title="Team Member" data-desc="">
+                JOEL BEAM
+              </li>
+              <li data-img="./comps/MAVRIKLogo.png" data-name="MATT CROCE" data-title="Team Member" data-desc="">
+                MATT CROCE
+              </li>
+              <li data-img="./comps/MAVRIKLogo.png" data-name="TERRY WALLS" data-title="Team Member" data-desc="">
+                TERRY WALLS
+              </li>
+              <li data-img="./comps/MAVRIKLogo.png" data-name="RYAN BATES" data-title="Team Member" data-desc="">
+                RYAN BATES
+              </li>
+              <li data-img="./comps/MAVRIKLogo.png" data-name="SCOTT CLIFTON" data-title="Team Member" data-desc="">
+                SCOTT CLIFTON
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="investor-info">
+          <p>
+            INVESTORS:
+            <a href="https://www.outlander.vc" target="_blank" rel="noopener noreferrer" class="investor-button">
+            OUTLANDER,
+            </a>
+            <a href="https://www.640oxford.com" target="_blank" rel="noopener noreferrer" class="investor-button">
+            640 OXFORD
+            </a>
+          </p>
+          <br>
+          <p>
+            <a href="https://www.linkedin.com/company/mavrik-technologies/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="social-button">
+              LINKEDIN
+            </a>
+          </p>
+          <p>
+            <a href="https://www.instagram.com/mavrikinc/" target="_blank" rel="noopener noreferrer" class="social-button">
+              INSTAGRAM
+            </a>
+          </p>
+          <p>
+            <a href="mailto:info@mavrik.tech" class="social-button">
+              INFO@MAVRIK.TECH
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Page 5: README with Scrollable List (Updated for two-column layout with image) -->
+      <div class="page page-5" id="readme">
+        <div class="container">
+          <h2 class="header-readme">README.</h2>
+          <div class="readme-content">
+            <div class="readme-image">
+              <img id="readmeImage" src="./comps/arrow.svg" alt="Decorative" />
+            </div>
+            <div class="scrollable-list">
+              <button type="button" class="list-item" onclick="window.open('https://ntrs.nasa.gov/api/citations/20020042193/downloads/20020042193.pdf', '_blank')">
+                <div class="list-item-title">
+                  <h3>Personal Air Vehicles</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>David Hall Consulting</p>
+                  <p>Hall, 2001</p>
+                </div>
+              </button>
+              <button type="button" class="list-item" onclick="window.open('https://www.doi.gov/sites/doi.gov/files/uploads/doi_uas_background_info_paper_gamechanger_the_promise_of_optionally-piloted_helicopters_in_wildland_fire_08_2018.pdf', '_blank')">
+                <div class="list-item-title">
+                  <h3>Optionally Piloted Helicopters</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>U.S. Department of the Interior</p>
+                  <p>2018</p>
+                </div>
+              </button>
+              <button type="button" class="list-item" onclick="window.open('https://web.stanford.edu/group/arl/projects/control-heavy-lift-helicopter-teams', '_blank')">
+                <div class="list-item-title">
+                  <h3>Heavy Lift Helicopter Teams</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>Stanford University</p>
+                  <p>Smith, 2011</p>
+                </div>
+              </button>
+              <button type="button" class="list-item" onclick="window.open('https://www.army.mil/article/272922/contested_logistics_environment_defined', '_blank')">
+                <div class="list-item-title">
+                  <h3>Contested Logistics</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>U.S. Army</p>
+                  <p>Maj. King, 2024</p>
+                </div>
+              </button>
+              <button type="button" class="list-item" onclick="window.open('https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12', '_blank')">
+                <div class="list-item-title">
+                  <h3>Golden Hour</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>Business Insider</p>
+                  <p>Baker and Pickrell, 2024</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="nav-button nav-button-left-spec" onclick="goToPage('team')">
+          &lt;&lt;&lt; BACK
+        </button>
+        <button class="nav-button nav-button-right" onclick="goToPage('home')">
+          HOME &gt;&gt;&gt;
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Random bobbing effect for center images
+    function setRandomBobbing() {
+      const randomPx = Math.floor(Math.random() * 6) + 3; // 3..8
+      const halfRandomPx = randomPx / 2;
+      document.documentElement.style.setProperty('--random-px', randomPx + "px");
+      document.documentElement.style.setProperty('--half-random-px', halfRandomPx + "px");
+    }
+    function goToPage(pageId) {
+  const targetPage = document.getElementById(pageId);
+  const wrapper = document.querySelector('.horizontal-scroll-wrapper');
+  if (targetPage && wrapper) {
+    if (window.innerWidth <= 765) {
+      wrapper.scroll({
+        left: 0,
+        top: targetPage.offsetTop,
+        behavior: 'smooth'
+      });
+    } else {
+      // For horizontal layout on desktop
+      wrapper.scroll({
+        left: targetPage.offsetLeft,
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }
+}
+
+    // Intercept anchor clicks in the home bottom nav
+    function interceptHomeLinks() {
+      const navLinks = document.querySelectorAll('.bottom-nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          const hash = link.getAttribute('href');
+          if (hash.startsWith('#')) {
+            goToPage(hash.slice(1));
+          }
+        });
+      });
+    }
+
+    // Countdown
+    function updateCountdown() {
+      const targetDate = new Date("April 2, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) {
+        document.getElementById("countdown").innerText = "[EXPIRED]";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const hDisplay = hours < 10 ? "0" + hours : hours;
+      const mDisplay = minutes < 10 ? "0" + minutes : minutes;
+      const sDisplay = seconds < 10 ? "0" + seconds : seconds;
+
+      document.getElementById("countdown").innerText =
+        "(" + days + ":" + hDisplay + ":" + mDisplay + ":" + sDisplay + ")";
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize bobbing effect
+      setRandomBobbing();
+      setInterval(setRandomBobbing, 1000);
+
+      // Intercept navigation links
+      interceptHomeLinks();
+
+      // Start countdown
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      /* ----------------------------------------------------------------
+         Team Page Hover Popup – now applies to both team lists
+      ---------------------------------------------------------------- */
+      const teamMembers = document.querySelectorAll('.team-list li');
+      const hoverImg = document.getElementById('hoverDisplayImg');
+      const hoverName = document.getElementById('hoverDisplayName');
+      const hoverDesc = document.getElementById('hoverDisplayDesc');
+
+      teamMembers.forEach(member => {
+        member.addEventListener('mouseover', () => {
+          const imgSrc = member.getAttribute('data-img');
+          const name   = member.getAttribute('data-name');
+          const title  = member.getAttribute('data-title');
+          const desc   = member.getAttribute('data-desc');
+
+          hoverImg.src = imgSrc;
+          hoverName.textContent = name;
+          hoverDesc.innerHTML = title + '<br>' + desc;
+        });
+
+        member.addEventListener('mouseout', () => {
+          // Reset to default placeholder
+          hoverImg.src = './comps/MAVRIKLogo.png';
+          hoverName.textContent = '';
+          hoverDesc.textContent = '';
+        });
+      });
+
+      /* ----------------------------------------------------------------
+         README Page – Scrollable List Active Item & Image Scaling
+         This checks which list item is centered, adds an "active" class,
+         and scales the left-side image smoothly.
+      ---------------------------------------------------------------- */
+      const scrollableList = document.querySelector('.scrollable-list');
+      if (scrollableList) {
+        function updateActiveListItem() {
+          const items = scrollableList.querySelectorAll('.list-item');
+          const containerRect = scrollableList.getBoundingClientRect();
+          const containerCenterY = containerRect.top + containerRect.height / 2;
+          let closestItem = null;
+          let minDistance = Infinity;
+          items.forEach(item => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenterY = itemRect.top + itemRect.height / 2;
+            const distance = Math.abs(containerCenterY - itemCenterY);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestItem = item;
+            }
+          });
+          items.forEach(item => {
+            if (item === closestItem) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+
+          // Update the scaling of the left-side image based on minDistance
+          const readmeImg = document.getElementById('readmeImage');
+          if (readmeImg) {
+            const maxDistance = 50; // threshold in pixels
+            const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
+            const effectiveDistance = Math.min(minDistance, maxDistance);
+            const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
+            readmeImg.style.transform = "scale(" + scale + ")";
+          }
+        }
+        scrollableList.addEventListener('scroll', updateActiveListItem);
+        updateActiveListItem();
+      }
+    });
+  </script>
+</body>
+</html>
