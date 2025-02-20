@@ -351,16 +351,16 @@
       text-align: right;
     }
     .corner-content-right p {
-  white-space: nowrap;
-  }
+      white-space: nowrap;
+    }
     .header-readme {
-    font-size: clamp(2rem, 5vw, 5rem); /* Dynamic font size */
-    text-align: center;
-    top: clamp(-2rem, -4vh, -4rem); /* Adjust this value to move it up */
-    margin-top: clamp(-10rem, -20vw, -20rem); /* Adjust this value to move it up */
-    margin-bottom: clamp(4.5rem, 9vh, 9rem); /* Dynamic margin-bottom */
-    color: #000;
-  }
+      font-size: clamp(2rem, 5vw, 5rem); /* Dynamic font size */
+      text-align: center;
+      top: clamp(-2rem, -4vh, -4rem); /* Adjust this value to move it up */
+      margin-top: clamp(-10rem, -20vw, -20rem); /* Adjust this value to move it up */
+      margin-bottom: clamp(4.5rem, 9vh, 9rem); /* Dynamic margin-bottom */
+      color: #000;
+    }
   
     /* Bobbing animation for center images */
     @keyframes bobbing {
@@ -402,20 +402,19 @@
       font-size: 1.2rem;
       margin: -.3rem;
     }
-    .center-text-placeholder p
-{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  font-size: clamp(2rem, 10vw, 10rem);
-  text-align: center;
-  animation: fadeblink 3s linear infinite;
-}
-.time-style {
-    font-size: clamp(0.75rem, 2vw, 4rem);
-  }
+    .center-text-placeholder p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      font-size: clamp(2rem, 10vw, 10rem);
+      text-align: center;
+      animation: fadeblink 3s linear infinite;
+    }
+    .time-style {
+      font-size: clamp(0.75rem, 2vw, 4rem);
+    }
 
     /* --------------------------------------------------------------------
        TEAM PAGE (PAGE 4) STYLES – RESPONSIVE, CLAMP-BASED LAYOUT
@@ -459,13 +458,13 @@
       display: none;
     }
     .team-hover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: clamp(100px, 35vh, 320px);
-  text-align: center;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: clamp(100px, 35vh, 320px);
+      text-align: center;
+    }
     .hover-display {
       padding: clamp(0.25rem, 1vw, 1rem);
       border-radius: 0.5rem;
@@ -570,6 +569,7 @@
       text-align: right;
       font-size: 0.97vw;
       line-height: 1.2;
+      white-space: nowrap;
     }
     .list-item-subtitles p {
       margin: 0;
@@ -604,222 +604,216 @@
       transform: scale(1);
     }
 
-
-
-
     /*------------------------------------------------------------------------------------------------------------------ */
     @media (max-width: 765px) {
-  /* Allow vertical scrolling on mobile devices */
-  html, body {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  /* Change the scroll container to use vertical layout */
-  .horizontal-scroll-wrapper {
+      /* Allow vertical scrolling on mobile devices */
+      html, body {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      /* Change the scroll container to use vertical layout */
+      .horizontal-scroll-wrapper {
         flex-direction: column;
         width: 100vw;
         height: 100vh;
         scroll-snap-type: y mandatory;
         overflow-y: auto;
       }
-  /* Adjust each page to fill the viewport vertically */
-  .page {
-    flex: 0 0 100vh;
-    width: 100vw;
-    height: 100vh;
-    scroll-snap-align: start;
-  }
+      /* Adjust each page to fill the viewport vertically */
+      .page {
+        flex: 0 0 100vh;
+        width: 100vw;
+        height: 100vh;
+        scroll-snap-align: start;
+      }
 
+      .logo-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 0 auto 0 auto; /* centers the logo row block */
+        transform: translateX(0);
+      }
 
-  .logo-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 0 auto 0 auto; /* centers the logo row block */
-      transform: translateX(0);
+      .mavrik-logo {
+        width: 45vw;
+        height: auto;
+      }
+      .bat-logo {
+        width: 10vh;
+        height: auto;
+      }
+      .subtitle p {
+        font-size: clamp(0.75rem, 1.3vh, 2rem);
+        margin: 0 auto 1rem auto; /* center the subtitle block horizontally */
+        text-align: left;         /* left-align the text inside */
+      }
+
+      .bottom-nav {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;  
+        text-decoration: underline;  /* Optional: center items horizontally */
+      }
+
+      .bottom-nav span {
+        display: none;          /* Hide the arrow spans */
+      }
+
+      .bottom-nav a {
+        margin: 0.5rem 0;       /* Optional: add vertical spacing between links */
+      }
+
+      .corner-content {
+        width: 35vw;
+        left: 10%;
+        bottom: 15vh;
+      }
+      .corner-logo {
+        width: 40vw;
+      }
+      .corner-text p {
+        font-size:  2vw;
+        text-align: left;
+        margin-left: 10%;
+      }
+      .center-image {
+        max-width: clamp(150px, 80vw, 1000px);
+        top: 30%;
+        left: 8%;
+        transform: rotate(10deg);
+        animation: none;
+      }
+
+      .nav-button-left {
+        display: none;
+      }
+      .nav-button-right {
+        display: none;
+      }
+      .nav-button-left-spec {
+        display: none;
+      }
+
+      .nomad-title {
+        font-size: 13vw;
+        margin: 0;
+        text-align: center;
+      }
+      .nomad-subtitle {
+        display: none;
+      }
+      .nomad-stats-right {
+        display: none;
+      }
+      /* Hide the original text */
+      .nomad-stats p {
+        visibility: hidden;
+      }
+      .corner-content-right {
+        top: 25vh;
+        right: 20%;
+      }
+      
+      /* Insert new multi-line text using ::after */
+      .nomad-stats::after {
+        content: "NOMAD\A/ˈnōˌmad/\A<A wanderer>\A\A" 
+                 "MAVRIK’s first\A"
+                 "Passenger Vehicle\A\A"
+                 "Built to prove concept of low-cost EVTOL vehicles built for passenger transport";
+        white-space: pre-line; /* Makes \A line breaks work */
+        position: absolute;
+        left: 20%;
+        top: 100%;
+        text-align: left;
+        font-size: 2vw;  /* Adjust font size as needed */
+        color: inherit;  /* Inherit text color */
+      }
+
+      .drone-title {
+        width: 100%;
+        height: auto;
+      }
+      .drone-title-block {
+        top: 10vh;
+      }
+      .time-style {
+        font-size: 7vw;
+      }
+      .drone-stats-right {
+        top: 55vh;         /* Move it closer to the top */
+        bottom: auto;
+        left: 0;
+        right: 0;
+        transform: none;  /* Remove the vertical translation */
+        text-align: center;
+      }
+      .drone-stats {
+        display: none;
+      }
+      .center-text-placeholder p {
+        font-size: 8vh;
+        line-height: 85%;
+        top: 40vh;
+      }
+      #hatchet .corner-content-right {
+        display: none;
+      }
+
+      .team-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Make each team section full width (or adjust as needed) */
+      .team-list,
+      .team-hover {
+        width: 100%;
+      }
+
+      /* Set the order so the left team list is on top, the center hover in the middle, and the right team list at the bottom */
+      .team-list.team-list-left {
+        order: 2;
+        text-align: center;
+      }
+      .team-hover {
+        order: 1;
+      }
+      .team-list.team-list-right {
+        display: none;
+      }
+      .hover-display img {
+        max-width: 50%;
+        height: auto;
+        margin-bottom: 5vh;
+      }
+      .center-top-logo {
+        width: 45vw;
+        margin-top: 10vh;
+        height: auto;
+      }
+      .investor-info {
+        bottom: 17vh;
+      }
+      .list-item-title h3 {
+        font-size: 5vw;
+      }
+      .list-item-subtitles {
+        font-size: 1vw;
+      }
+      .scrollable-list {
+        width: 90vw;
+      }
+      .scrollable-list button.list-item {
+        width: 90vw;
+      }
+
+      .readme-image {
+        display: none;
+      }
     }
-
-    .mavrik-logo {
-      width: 45vw;
-      height: auto;
-    }
-    .bat-logo {
-      width: 10vh;
-      height: auto;
-    }
-    .subtitle p{
-      font-size: clamp(0.75rem, 1.3vh, 2rem);
-      margin: 0 auto 1rem auto; /* center the subtitle block horizontally */
-      text-align: left;         /* left-align the text inside */
-    }
-
-  .bottom-nav {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center;  
-    text-decoration: underline;  /* Optional: center items horizontally */
-  }
-
-  .bottom-nav span {
-    display: none;          /* Hide the arrow spans */
-  }
-
-  .bottom-nav a {
-    margin: 0.5rem 0;       /* Optional: add vertical spacing between links */
-  }
-
-
-
-.corner-content {
-  width: 35vw;
-  left: 10%;
-  bottom: 15vh;
-}
-.corner-logo{
-  width: 40vw;
-}
-.corner-text p{
-  font-size:  2vw;
-  text-align: left;
-  margin-left: 10%;
-}
-  .center-image {
-    max-width: clamp(150px, 80vw, 1000px);
-    top: 30%;
-    left: 8%;
-    transform: rotate(10deg);
-    animation: none;
-  }
-
-  .nav-button-left {
-    display: none;
-  }
-  .nav-button-right {
-    display: none;
-  }
-  .nav-button-left-spec{
-    display: none;
-}
-
-
-
-
-
-  .nomad-title {
-    font-size: 13vw;
-    margin: 0;
-    text-align: center;
-  }
-  .nomad-subtitle{
-    display: none;
-  }
-  .nomad-stats-right{
-    display: none;
-  }
-  /* Hide the original text */
-  .nomad-stats p {
-    visibility: hidden;
-  }
-  .corner-content-right {
-    top: 25vh;
-    right: 10%;
-  }
-  
-  /* Insert new multi-line text using ::after */
-  .nomad-stats::after {
-    content: "NOMAD\A/ˈnōˌmad/\A<A wanderer>\A\A" 
-             "MAVRIK’s first\A"
-             "Passenger Vehicle\A\A"
-             "Built to prove concept of low-cost EVTOL vehicles built for passenger transport";
-    white-space: pre-line; /* Makes \A line breaks work */
-    position: absolute;
-    left: 20%;
-    top: 100%;
-    text-align: left;
-    font-size: 2vw;  /* Adjust font size as needed */
-    color: inherit;  /* Inherit text color */
-  }
-
-
-  .drone-title{
-    width: 100%;
-    height: auto;
-  }
-  .drone-title-block {
-    top: 10vh;
-  }
-  .time-style {
-    font-size: 7vw;
-  }
-  .drone-stats-right {
-    top: 55vh;         /* Move it closer to the top */
-    bottom: auto;
-    left: 0;
-    right: 0;
-    transform: none;  /* Remove the vertical translation */
-    text-align: center;
-  }
-  .drone-stats{
-    display: none;
-  }
-  .center-text-placeholder p{
-    font-size: 8vh;
-    line-height: 85%;
-    top: 40vh;
-  }
-  #hatchet .corner-content-right {
-    display: none;
-  }
-
-  .team-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Make each team section full width (or adjust as needed) */
-  .team-list,
-  .team-hover {
-    width: 100%;
-  }
-
-  /* Set the order so the left team list is on top, the center hover in the middle, and the right team list at the bottom */
-  
-  .team-list.team-list-left {
-    order: 2;
-    text-align: center;
-  }
-  .team-hover {
-    order: 1;
-  }
-  .team-list.team-list-right {
-    display: none;
-  }
-  .hover-display img {
-      max-width: 50%;
-      height: auto;
-      margin-bottom: 5vh;
-    }
-  .center-top-logo {
-    width: 45vw;
-    margin-top: 10vh;
-    height: auto;
-  }
-  .investor-info{
-    bottom: 17vh;
-  }
-
-.readme-image{
-  display: none;
-}
-
-
-
-
-}
-/*------------------------------------------------------------------------------------------------------------------ */
-
-
+    /*------------------------------------------------------------------------------------------------------------------ */
   </style>
 </head>
 <body>
@@ -1075,7 +1069,7 @@
                   <h3>Optionally Piloted Helicopters</h3>
                 </div>
                 <div class="list-item-subtitles">
-                  <p>U.S. Department of the Interior</p>
+                  <p>U.S. D.O.I.</p>
                   <p>2018</p>
                 </div>
               </button>
@@ -1198,8 +1192,10 @@
   
       /* ----------------------------------------------------------------
          Team Page Hover Popup – now applies only on desktop (min-width: 766px)
+         Toggle via the "enableTeamHover" variable.
       ---------------------------------------------------------------- */
-      if (window.matchMedia("(min-width: 766px)").matches) {
+      const enableTeamHover = false; // Change to true to enable team hover popup
+      if (enableTeamHover && window.matchMedia("(min-width: 766px)").matches) {
         const teamMembers = document.querySelectorAll('.team-list li');
         const hoverImg = document.getElementById('hoverDisplayImg');
         const hoverName = document.getElementById('hoverDisplayName');
@@ -1271,5 +1267,5 @@
       }
     });
   </script>
-  </body>
+</body>
 </html>
