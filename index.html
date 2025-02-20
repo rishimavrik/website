@@ -245,7 +245,7 @@
     .nomad-subtitle {
       font-family: 'EuropaGroSHOP', sans-serif;
       font-size: clamp(1rem, 5vw, 4rem);
-      margin-right: 10rem;
+      margin-right: 10vw;
       text-align: right;
     }
 
@@ -369,6 +369,13 @@
       50%  { transform: translate(-50%, calc(-50% - var(--random-px))); }
       75%  { transform: translate(-50%, calc(-50% - var(--half-random-px))); }
       100% { transform: translate(-50%, -50%); }
+    }
+    @keyframes bobbingmob {
+      0%   { transform: translate(0%, 5%); }
+      25%  { transform: translate(0%, calc(5% - var(--half-random-px))); }
+      50%  { transform: translate(0%, calc(5% - var(--random-px))); }
+      75%  { transform: translate(0%, calc(5% - var(--half-random-px))); }
+      100% { transform: translate(0%, 5%); }
     }
 
     /* Blinking for "COMPLETE" */
@@ -683,7 +690,7 @@
         top: 30%;
         left: 8%;
         transform: rotate(10deg);
-        animation: none;
+        animation: bobbingmob 1s infinite steps(2, end);
       }
 
       .nav-button-left {
@@ -700,7 +707,7 @@
         font-size: 13vw;
         margin: 0;
         text-align: center;
-        margin-top: 3vh;
+        margin-top: 4vh;
 
       }
       .nomad-subtitle {
@@ -778,7 +785,7 @@
       .team-list.team-list-left {
         order: 2;
         text-align: center;
-        top: 8vh;
+        top: 6vh;
       }
       .team-hover {
         order: 1;
@@ -790,13 +797,13 @@
       .hover-display img {
         max-width: 50%;
         height: auto;
-        margin-bottom: 5vh;
+        margin-bottom: 6vh;
       }
 
 
       .center-top-logo {
         width: 45vw;
-        margin-top: 8vh;
+        margin-top: 6vh;
         height: auto;
       }
       .investor-info {
