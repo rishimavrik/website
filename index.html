@@ -673,8 +673,8 @@
 
 .corner-content {
   width: 35vw;
-  left: 5vw;
-  bottom: 15vh;
+  left: 12%;
+  bottom: 10vh;
 }
 .corner-logo{
   width: 40vw;
@@ -682,6 +682,7 @@
 .corner-text p{
   font-size:  2vw;
   text-align: left;
+  margin-left: 10%;
 }
   .center-image {
     max-width: clamp(150px, 80vw, 1000px);
@@ -692,16 +693,13 @@
   }
 
   .nav-button-left {
-    left: 5vw;
-    bottom: 4%; /* Adjust this value to move the button farther from the bottom */
+    display: none;
   }
   .nav-button-right {
-    right: 5vw;
-    bottom: 4%; /* Adjust this value to move the button farther from the bottom */
+    display: none;
   }
   .nav-button-left-spec{
-  left: 5vw;
-  bottom: 4%;
+    display: none;
 }
 
 
@@ -725,6 +723,7 @@
   }
   .corner-content-right {
     top: 25vh;
+    right: 10%;
   }
   
   /* Insert new multi-line text using ::after */
@@ -744,16 +743,18 @@
 
 
   .drone-title{
-    width: 95%;
+    width: 100%;
     height: auto;
-    margin-top: 10vh;
+  }
+  .drone-title-block {
+    top: 10vh;
   }
   .time-style {
-    font-size: 8vw;
-    top: 0;
+    font-size: 7vw;
   }
   .drone-stats-right {
-    top: 5vh;         /* Move it closer to the top */
+    top: 55vh;         /* Move it closer to the top */
+    bottom: auto;
     left: 0;
     right: 0;
     transform: none;  /* Remove the vertical translation */
@@ -763,7 +764,12 @@
     display: none;
   }
   .center-text-placeholder p{
-    font-size: 10vh;
+    font-size: 8vh;
+    line-height: 85%;
+    top: 40vh;
+  }
+  #hatchet .corner-content-right {
+    display: none;
   }
 
   .team-container {
@@ -905,7 +911,10 @@
           <p>COMING SOON</p>
         </div>
         <div class="drone-title-block">
-          <img src="./comps/HATCHET.svg" alt="Large Hatchet Title" class="drone-title" />
+          <picture>
+            <source media="(max-width: 765px)" srcset="./comps/hatchetmob.svg">
+            <img src="./comps/HATCHET.svg" alt="Large Hatchet Title" class="drone-title" />
+          </picture>          
         </div>
         <div class="drone-stats">
           <p>
@@ -1117,27 +1126,28 @@
       document.documentElement.style.setProperty('--random-px', randomPx + "px");
       document.documentElement.style.setProperty('--half-random-px', halfRandomPx + "px");
     }
+  
     function goToPage(pageId) {
-  const targetPage = document.getElementById(pageId);
-  const wrapper = document.querySelector('.horizontal-scroll-wrapper');
-  if (targetPage && wrapper) {
-    if (window.innerWidth <= 765) {
-      wrapper.scroll({
-        left: 0,
-        top: targetPage.offsetTop,
-        behavior: 'smooth'
-      });
-    } else {
-      // For horizontal layout on desktop
-      wrapper.scroll({
-        left: targetPage.offsetLeft,
-        top: 0,
-        behavior: 'smooth'
-      });
+      const targetPage = document.getElementById(pageId);
+      const wrapper = document.querySelector('.horizontal-scroll-wrapper');
+      if (targetPage && wrapper) {
+        if (window.innerWidth <= 765) {
+          wrapper.scroll({
+            left: 0,
+            top: targetPage.offsetTop,
+            behavior: 'smooth'
+          });
+        } else {
+          // For horizontal layout on desktop
+          wrapper.scroll({
+            left: targetPage.offsetLeft,
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+      }
     }
-  }
-}
-
+  
     // Intercept anchor clicks in the home bottom nav
     function interceptHomeLinks() {
       const navLinks = document.querySelectorAll('.bottom-nav a');
@@ -1151,7 +1161,7 @@
         });
       });
     }
-
+  
     // Countdown
     function updateCountdown() {
       const targetDate = new Date("April 2, 2025 00:00:00").getTime();
@@ -1165,59 +1175,61 @@
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+  
       const hDisplay = hours < 10 ? "0" + hours : hours;
       const mDisplay = minutes < 10 ? "0" + minutes : minutes;
       const sDisplay = seconds < 10 ? "0" + seconds : seconds;
-
+  
       document.getElementById("countdown").innerText =
         "(" + days + ":" + hDisplay + ":" + mDisplay + ":" + sDisplay + ")";
     }
-
+  
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize bobbing effect
       setRandomBobbing();
       setInterval(setRandomBobbing, 1000);
-
+  
       // Intercept navigation links
       interceptHomeLinks();
-
+  
       // Start countdown
       updateCountdown();
       setInterval(updateCountdown, 1000);
-
+  
       /* ----------------------------------------------------------------
-         Team Page Hover Popup – now applies to both team lists
+         Team Page Hover Popup – now applies only on desktop (min-width: 766px)
       ---------------------------------------------------------------- */
-      const teamMembers = document.querySelectorAll('.team-list li');
-      const hoverImg = document.getElementById('hoverDisplayImg');
-      const hoverName = document.getElementById('hoverDisplayName');
-      const hoverDesc = document.getElementById('hoverDisplayDesc');
-
-      teamMembers.forEach(member => {
-        member.addEventListener('mouseover', () => {
-          const imgSrc = member.getAttribute('data-img');
-          const name   = member.getAttribute('data-name');
-          const title  = member.getAttribute('data-title');
-          const desc   = member.getAttribute('data-desc');
-
-          hoverImg.src = imgSrc;
-          hoverName.textContent = name;
-          hoverDesc.innerHTML = title + '<br>' + desc;
+      if (window.matchMedia("(min-width: 766px)").matches) {
+        const teamMembers = document.querySelectorAll('.team-list li');
+        const hoverImg = document.getElementById('hoverDisplayImg');
+        const hoverName = document.getElementById('hoverDisplayName');
+        const hoverDesc = document.getElementById('hoverDisplayDesc');
+  
+        teamMembers.forEach(member => {
+          member.addEventListener('mouseover', () => {
+            const imgSrc = member.getAttribute('data-img');
+            const name   = member.getAttribute('data-name');
+            const title  = member.getAttribute('data-title');
+            const desc   = member.getAttribute('data-desc');
+  
+            hoverImg.src = imgSrc;
+            hoverName.textContent = name;
+            hoverDesc.innerHTML = title + '<br>' + desc;
+          });
+  
+          member.addEventListener('mouseout', () => {
+            // Reset to default placeholder
+            hoverImg.src = './comps/MAVRIKLogo.png';
+            hoverName.textContent = '';
+            hoverDesc.textContent = '';
+          });
         });
-
-        member.addEventListener('mouseout', () => {
-          // Reset to default placeholder
-          hoverImg.src = './comps/MAVRIKLogo.png';
-          hoverName.textContent = '';
-          hoverDesc.textContent = '';
-        });
-      });
-
+      }
+  
       /* ----------------------------------------------------------------
          README Page – Scrollable List Active Item & Image Scaling
-         This checks which list item is centered, adds an "active" class,
-         and scales the left-side image smoothly.
+           This checks which list item is centered, adds an "active" class,
+           and scales the left-side image smoothly.
       ---------------------------------------------------------------- */
       const scrollableList = document.querySelector('.scrollable-list');
       if (scrollableList) {
@@ -1243,7 +1255,7 @@
               item.classList.remove('active');
             }
           });
-
+  
           // Update the scaling of the left-side image based on minDistance
           const readmeImg = document.getElementById('readmeImage');
           if (readmeImg) {
@@ -1259,5 +1271,5 @@
       }
     });
   </script>
-</body>
+  </body>
 </html>
