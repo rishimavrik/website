@@ -5,14 +5,14 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-2FZ9S1WMP7');
-</script>
+    gtag('config', 'G-2FZ9S1WMP7');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -324,6 +324,26 @@
       }
       100% {
         color: rgba(0, 0, 0, 1);
+      }
+    }
+
+    /* -----------------------------------
+       Bouncing Arrow Animation
+    ----------------------------------- */
+    .bouncing-arrow {
+      animation: bounce 2s infinite;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
       }
     }
 
@@ -1090,13 +1110,23 @@
               <img id="readmeImage" src="./comps/arrow.svg" alt="Decorative" />
             </div>
             <div class="scrollable-list">
-              <button type="button" class="list-item" onclick="window.open('https://ntrs.nasa.gov/api/citations/20020042193/downloads/20020042193.pdf', '_blank')">
+              <!-- Newest to Oldest Order -->
+              <button type="button" class="list-item" onclick="window.open('https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12', '_blank')">
                 <div class="list-item-title">
-                  <h3>Personal Air Vehicles</h3>
+                  <h3>Golden Hour</h3>
                 </div>
                 <div class="list-item-subtitles">
-                  <p>David Hall Consulting</p>
-                  <p>Hall, 2001</p>
+                  <p>Business Insider</p>
+                  <p>Baker and Pickrell, 2024</p>
+                </div>
+              </button>
+              <button type="button" class="list-item" onclick="window.open('https://www.army.mil/article/272922/contested_logistics_environment_defined', '_blank')">
+                <div class="list-item-title">
+                  <h3>Contested Logistics</h3>
+                </div>
+                <div class="list-item-subtitles">
+                  <p>U.S. Army</p>
+                  <p>Maj. King, 2024</p>
                 </div>
               </button>
               <button type="button" class="list-item" onclick="window.open('https://www.doi.gov/sites/doi.gov/files/uploads/doi_uas_background_info_paper_gamechanger_the_promise_of_optionally-piloted_helicopters_in_wildland_fire_08_2018.pdf', '_blank')">
@@ -1117,25 +1147,20 @@
                   <p>Smith, 2011</p>
                 </div>
               </button>
-              <button type="button" class="list-item" onclick="window.open('https://www.army.mil/article/272922/contested_logistics_environment_defined', '_blank')">
+              <button type="button" class="list-item" onclick="window.open('https://ntrs.nasa.gov/api/citations/20020042193/downloads/20020042193.pdf', '_blank')">
                 <div class="list-item-title">
-                  <h3>Contested Logistics</h3>
+                  <h3>Personal Air Vehicles</h3>
                 </div>
                 <div class="list-item-subtitles">
-                  <p>U.S. Army</p>
-                  <p>Maj. King, 2024</p>
-                </div>
-              </button>
-              <button type="button" class="list-item" onclick="window.open('https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12', '_blank')">
-                <div class="list-item-title">
-                  <h3>Golden Hour</h3>
-                </div>
-                <div class="list-item-subtitles">
-                  <p>Business Insider</p>
-                  <p>Baker and Pickrell, 2024</p>
+                  <p>David Hall Consulting</p>
+                  <p>Hall, 2001</p>
                 </div>
               </button>
             </div>
+          </div>
+          <!-- Bouncing Arrow Below Articles -->
+          <div class="bouncing-arrow">
+            <img src="./comps/arrow.svg" alt="Bouncing Arrow" />
           </div>
         </div>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('team')">
@@ -1193,7 +1218,8 @@
   
     // Countdown
     function updateCountdown() {
-      const targetDate = new Date("April 2, 2025 00:00:00").getTime();
+      // Updated target date to end of May (May 31, 2025 23:59:59)
+      const targetDate = new Date("May 31, 2025 23:59:59").getTime();
       const now = new Date().getTime();
       const distance = targetDate - now;
       if (distance < 0) {
