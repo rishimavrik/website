@@ -602,15 +602,17 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
     }
     .list-item.active {
       color: #000;
+      background-color: rgba(0, 0, 0, 0.1); /* Add a subtle background highlight */
+      transform: scale(1.02); /* Slightly larger scale for emphasis */
     }
-    
     .list-item:not(.active) {
       transform: scale(.99);
       color: #aaa;
+      background-color: transparent;
     }
 
     .list-item-title h3 {
@@ -1302,43 +1304,67 @@
            and scales the left-side image smoothly.
       ---------------------------------------------------------------- */
       const scrollableList = document.querySelector('.scrollable-list');
-      if (scrollableList) {
-        function updateActiveListItem() {
-          const items = scrollableList.querySelectorAll('.list-item');
-          const containerRect = scrollableList.getBoundingClientRect();
-          const containerCenterY = containerRect.top + containerRect.height / 2;
-          let closestItem = null;
-          let minDistance = Infinity;
-          items.forEach(item => {
-            const itemRect = item.getBoundingClientRect();
-            const itemCenterY = itemRect.top + itemRect.height / 2;
-            const distance = Math.abs(containerCenterY - itemCenterY);
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestItem = item;
+        if (scrollableList) {
+          function updateActiveListItem() {
+            const items = scrollableList.querySelectorAll('.list-item');
+            const containerRect = scrollableList.getBoundingClientRect();
+            const containerCenterY = containerRect.top + containerRect.height / 2;
+        
+            let closestItem = null;
+            let minDistance = Infinity;
+        
+            items.forEach(item => {
+              const itemRect = item.getBoundingClientRect();
+              const itemCenterY = itemRect.top + itemRect.height / 2;
+              const distance = Math.abs(containerCenterY - itemCenterY);
+              if (distance < minDistance) {
+                minDistance = distance;
+                closestItem = item;
+              }
+            });
+        
+            items.forEach(item => {
+              if (item === closestItem) {
+                item.classList.add('active');
+              } else {
+                item.classList.remove('active');
+              }
+            });
+        
+            // Update the scaling of the left-side image based on minDistance
+            const readmeImg = document.getElementById('readmeImage');
+            if (readmeImg) {
+              const maxDistance = 50; // threshold in pixels
+              const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
+              const effectiveDistance = Math.min(minDistance, maxDistance);
+              const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
+              readmeImg.style.transform = `scale(${scale})`;
             }
-          });
-          items.forEach(item => {
-            if (item === closestItem) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-  
-          // Update the scaling of the left-side image based on minDistance
-          const readmeImg = document.getElementById('readmeImage');
-          if (readmeImg) {
-            const maxDistance = 50; // threshold in pixels
-            const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
-            const effectiveDistance = Math.min(minDistance, maxDistance);
-            const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
-            readmeImg.style.transform = "scale(" + scale + ")";
           }
+        
+          // Debounce function to limit how often the update runs
+          function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+              const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+              };
+              clearTimeout(timeout);
+              timeout = setTimeout(later, wait);
+            };
+          }
+        
+          // Use scrollend if available, otherwise fall back to debounced scroll
+          if ('onscrollend' in window) {
+            scrollableList.addEventListener('scrollend', updateActiveListItem);
+          } else {
+            scrollableList.addEventListener('scroll', debounce(updateActiveListItem, 100));
+          }
+        
+          // Initial call to set the active item
+          updateActiveListItem();
         }
-        scrollableList.addEventListener('scroll', updateActiveListItem);
-        updateActiveListItem();
-      }
     });
   </script>
 </body>
