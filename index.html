@@ -579,12 +579,12 @@
       width: 75vw;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;     /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
       position: relative;
     }
     .scrollable-list::-webkit-scrollbar {
-      display: none;             /* Chrome, Safari, Opera */
+      display: none; /* Chrome, Safari, Opera */
     }
     /* Add extra space at the top and bottom so the first and last items can center */
     .scrollable-list::before,
@@ -602,23 +602,31 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+      background-color: transparent;
     }
     .list-item.active {
       color: #000;
+      background-color: rgba(0, 0, 0, 0.05); /* Subtle highlight for active item */
+      transform: scale(1);
     }
-    
+    .list-item.active .list-item-title h3,
+    .list-item.active .list-item-subtitles p {
+      color: #000; /* Ensure child elements are black */
+    }
     .list-item:not(.active) {
-      transform: scale(.99);
       color: #aaa;
+      transform: scale(0.99);
     }
-
+    .list-item:not(.active) .list-item-title h3,
+    .list-item:not(.active) .list-item-subtitles p {
+      color: #aaa; /* Ensure child elements are gray */
+    }
     .list-item-title h3 {
       margin: 0;
-      margin-right: 0rem;
       font-size: 2.78vw;
       text-align: left;
-      font-family: 'EuropaGroSHOP', sans-serif;
+      font-family: "EuropaGroSHOP", sans-serif;
       font-weight: normal;
     }
     .list-item-subtitles {
@@ -638,8 +646,8 @@
       font: inherit;
       display: flex;
       width: 75vw;
+      color: inherit; /* Ensure button inherits color */
     }
-
     /* --------------------------------------------------------------------
        README PAGE – README CONTENT LAYOUT WITH IMAGE
     -------------------------------------------------------------------- */
@@ -1295,11 +1303,10 @@
           });
         });
       }
-  
-      /* ----------------------------------------------------------------
+            /* ----------------------------------------------------------------
          README Page – Scrollable List Active Item & Image Scaling
-           This checks which list item is centered, adds an "active" class,
-           and scales the left-side image smoothly.
+         This checks which list item is centered, adds an "active" class,
+         and scales the left-side image smoothly.
       ---------------------------------------------------------------- */
       const scrollableList = document.querySelector('.scrollable-list');
       if (scrollableList) {
@@ -1309,6 +1316,7 @@
           const containerCenterY = containerRect.top + containerRect.height / 2;
           let closestItem = null;
           let minDistance = Infinity;
+      
           items.forEach(item => {
             const itemRect = item.getBoundingClientRect();
             const itemCenterY = itemRect.top + itemRect.height / 2;
@@ -1318,6 +1326,7 @@
               closestItem = item;
             }
           });
+      
           items.forEach(item => {
             if (item === closestItem) {
               item.classList.add('active');
@@ -1325,19 +1334,24 @@
               item.classList.remove('active');
             }
           });
-  
+      
           // Update the scaling of the left-side image based on minDistance
           const readmeImg = document.getElementById('readmeImage');
           if (readmeImg) {
             const maxDistance = 50; // threshold in pixels
             const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
             const effectiveDistance = Math.min(minDistance, maxDistance);
-            const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
-            readmeImg.style.transform = "scale(" + scale + ")";
+            const scale = 1.0 + (maxDistance - effectiveDistance) / maxDistance * scaleExtra;
+            readmeImg.style.transform = `scale(${scale})`;
           }
         }
+      
+        // Initialize and update on scroll
         scrollableList.addEventListener('scroll', updateActiveListItem);
         updateActiveListItem();
+      
+        // Ensure initial scroll position triggers active item
+        setTimeout(updateActiveListItem, 100); // Run after a short delay to account for initial rendering
       }
     });
   </script>
