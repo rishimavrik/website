@@ -604,15 +604,15 @@
       padding: 0 1rem;
       transition: transform 0.3s ease, color 0.3s ease;
     }
-    .list-item.active .list-item-title h3,
-    .list-item.active .list-item-subtitles p {
+    .list-item.active {
       color: #000;
     }
     
-    .list-item:not(.active) .list-item-title h3,
-    .list-item:not(.active) .list-item-subtitles p {
+    .list-item:not(.active) {
+      transform: scale(.99);
       color: #aaa;
     }
+
     .list-item-title h3 {
       margin: 0;
       margin-right: 0rem;
