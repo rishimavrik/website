@@ -604,11 +604,13 @@
       padding: 0 1rem;
       transition: transform 0.3s ease, color 0.3s ease;
     }
-    .list-item.active {
+    .list-item.active .list-item-title h3,
+    .list-item.active .list-item-subtitles p {
       color: #000;
     }
-    .list-item:not(.active) {
-      transform: scale(.99);
+    
+    .list-item:not(.active) .list-item-title h3,
+    .list-item:not(.active) .list-item-subtitles p {
       color: #aaa;
     }
     .list-item-title h3 {
@@ -1149,7 +1151,7 @@
                   <p>2018</p>
                 </div>
               </button>
-              <button type="button" class="list-item" onclick="window.open('https://web.stanford.edu/group/arl/projects/control-heavy-lift-helicopter-teams', '_blank')">
+              <button type="button" class="list-item" onclick="window.open('https://web.stanford.edu/group/scpnt/pnt/PNT09/student_posters/4_Smith_Heavy_Lift_Helicopter.pdf', '_blank')">
                 <div class="list-item-title">
                   <h3>Heavy Lift Helicopter Teams</h3>
                 </div>
