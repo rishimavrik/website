@@ -605,12 +605,23 @@
       transition: transform 0.3s ease, color 0.3s ease;
     }
     .list-item.active {
-      color: #000;
+      color: #000 !important; /* Ensure black color for the active item */
+      transform: scale(1); /* Maintain scale for active item */
+    }
+    
+    .list-item.active .list-item-title h3,
+    .list-item.active .list-item-subtitles p {
+      color: #000 !important; /* Explicitly set black for child elements */
     }
     
     .list-item:not(.active) {
-      transform: scale(.99);
-      color: #aaa;
+      transform: scale(0.99);
+      color: #aaa !important; /* Gray out non-active items */
+    }
+    
+    .list-item:not(.active) .list-item-title h3,
+    .list-item:not(.active) .list-item-subtitles p {
+      color: #aaa !important; /* Ensure child elements are also grayed out */
     }
 
     .list-item-title h3 {
