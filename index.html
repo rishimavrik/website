@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2FZ9S1WMP7');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2FZ9S1WMP7');
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -310,6 +314,7 @@
       z-index: 1;
     }
 
+
     @keyframes fadeblink {
       0% {
         color: rgba(0, 0, 0, 1);
@@ -319,30 +324,6 @@
       }
       100% {
         color: rgba(0, 0, 0, 1);
-      }
-    }
-
-    /* -----------------------------------
-       Bouncing Arrow Animation
-    ----------------------------------- */
-    .bouncing-arrow {
-      animation: bounce 2s infinite;
-      text-align: center;
-      margin-top: 1rem;
-    }
-    .bouncing-arrow img {
-      /* Rotate the arrow 180° to point downwards */
-      transform: rotate(270deg);
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0) rotate(180deg);
-      }
-      40% {
-        transform: translateY(-10px) rotate(180deg);
-      }
-      60% {
-        transform: translateY(-5px) rotate(180deg);
       }
     }
 
@@ -530,7 +511,7 @@
       margin: clamp(0.25rem, 1vw, 0.75rem) 0;
     }
     .hover-display p {
-      margin:  navigational
+      margin: 0;
       font-size: clamp(0.4rem, 1.5vw, 1rem);
     }
     .investor-info {
@@ -569,7 +550,7 @@
        README PAGE – SCROLLABLE LIST STYLES
     -------------------------------------------------------------------- */
     .scrollable-list {
-      height: 240px;
+      height: 210px;
       width: 75vw;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
@@ -596,19 +577,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
-      transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-      background-color: transparent;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
     .list-item.active {
-      transform: scale(1);
       color: #000;
-      background-color: rgba(0, 0, 0, 0.1); /* Subtle background for highlighting */
-      font-weight: bold; /* Bolder text for active item */
     }
     .list-item:not(.active) {
-      transform: scale(0.99);
+      transform: scale(.99);
       color: #aaa;
-      background-color: transparent;
     }
     .list-item-title h3 {
       margin: 0;
@@ -727,7 +703,7 @@
         width: 40vw;
       }
       .corner-text p {
-        font-size: 2vw;
+        font-size:  2vw;
         text-align: left;
         margin-left: 10%;
       }
@@ -754,6 +730,7 @@
         margin: 0;
         text-align: center;
         margin-top: 4vh;
+
       }
       .nomad-subtitle {
         display: none;
@@ -845,6 +822,7 @@
         margin-bottom: 6vh;
       }
 
+
       .center-top-logo {
         width: 45vw;
         margin-top: 6vh;
@@ -865,6 +843,7 @@
       .scrollable-list button.list-item {
         width: 90vw;
       }
+
       .readme-image {
         display: none;
       }
@@ -884,7 +863,7 @@
           </div>
           <div class="subtitle">
             <p>\\\\\\\<br>
-               Next-Gen Transport & Cargo Logistics<br>
+               Next-Gen Transport &amp; Cargo Logistics<br>
                Built for Real-World Impact</p>
             <br>
             <p>Solving the ‘Golden Hour’ problem<br>
@@ -910,7 +889,7 @@
         <div class="nomad-stats">
           <p>
             /ˈnōˌmad/<br>
-            <A wanderer><br><br>
+            &lt;A wanderer&gt;<br><br>
             MAVRIK’s first Passenger<br>
             vehicle - Built to prove the <br>
             concept of low-cost EVTOL <br>
@@ -932,7 +911,7 @@
           </button>
           <div class="corner-text" id="cornerTextContent">
             <p>
-              © 2025 By Mavrik Inc<br><br>
+              © 2024 By Mavrik Inc<br><br>
               Independently owned/operated<br><br>
               Mavrik, Inc<br>
               3355 E Spring St<br>
@@ -948,10 +927,10 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('home')">
-          <<< BACK
+          &lt;&lt;&lt; BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('hatchet')">
-          HATCHET >>>
+          HATCHET &gt;&gt;&gt;
         </button>
       </div>
 
@@ -969,14 +948,17 @@
         <div class="drone-stats">
           <p>
             /ˈhaCHət/<br>
-            <A versatile survival tool><br><br>
+            &lt;A versatile survival tool&gt;<br><br>
             MAVRIK’s first production <br>
-            vehicle disrupts current <br>
+            vehicle Disrupts current <br>
             contested logistics <br>
             market. Designed with <br>
             complete autonomy and <br>
             heavy lift power. <br>
           </p>
+        </div>
+        <div class="drone-stats-right">
+          <div id="countdown" class="time-style">(0:00:00)</div>
         </div>
         <div class="corner-content">
           <button class="corner-button" onclick="goToPage('home')">
@@ -984,7 +966,7 @@
           </button>
           <div class="corner-text">
             <p>
-              © 2025 By Mavrik Inc<br><br>
+              © 2024 By Mavrik Inc<br><br>
               Independently owned/operated<br><br>
               Mavrik, Inc<br>
               3355 E Spring St<br>
@@ -1002,10 +984,10 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('nomad')">
-          <<< BACK
+          &lt;&lt;&lt; BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('team')">
-          TEAM >>>
+          TEAM &gt;&gt;&gt;
         </button>
       </div>
 
@@ -1015,10 +997,10 @@
           <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIk Wordmark" class="center-top-logo" />
         </button>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('hatchet')">
-          <<< BACK
+          &lt;&lt;&lt; BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('readme')">
-          README >>>
+          README &gt;&gt;&gt;
         </button>
         <div class="team-container">
           <!-- Left team list: Existing members -->
@@ -1033,11 +1015,11 @@
               <li data-img="./comps/jt_klenke.jpg" data-name="JT Klenke" data-title="Designer" data-desc="Some University">
                 JT KLENKE
               </li>
-              <li data-img="./comps/tim_huntzinger.jpg" data-name="Mohamed Ahmed" data-title="COO" data-desc="Some University">
-                MOHAMED AHMED
-              </li>
               <li data-img="./comps/rishi_mannava.jpg" data-name="Rishi Mannava" data-title="Software Dev" data-desc="Some University">
                 RISHI MANNAVA
+              </li>
+              <li data-img="./comps/tim_huntzinger.jpg" data-name="Tim Huntzinger" data-title="COO" data-desc="Some University">
+                MOHAMED AHMED
               </li>
             </ul>
           </div>
@@ -1108,7 +1090,6 @@
               <img id="readmeImage" src="./comps/arrow.svg" alt="Decorative" />
             </div>
             <div class="scrollable-list">
-              <!-- Newest to Oldest Order -->
               <button type="button" class="list-item" onclick="window.open('https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12', '_blank')">
                 <div class="list-item-title">
                   <h3>Golden Hour</h3>
@@ -1154,27 +1135,14 @@
                   <p>Smith, 2011</p>
                 </div>
               </button>
-              <button type="button" class="list-item" onclick="window.open('https://ntrs.nasa.gov/api/citations/20020042193/downloads/20020042193.pdf', '_blank')">
-                <div class="list-item-title">
-                  <h3>Personal Air Vehicles</h3>
-                </div>
-                <div class="list-item-subtitles">
-                  <p>David Hall Consulting</p>
-                  <p>Hall, 2001</p>
-                </div>
-              </button>
             </div>
-          </div>
-          <!-- Bouncing Arrow Below Articles -->
-          <div class="bouncing-arrow">
-            <img src="./comps/arrow.svg" alt="Bouncing Arrow" />
           </div>
         </div>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('team')">
-          <<< BACK
+          &lt;&lt;&lt; BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('home')">
-          HOME >>>
+          HOME &gt;&gt;&gt;
         </button>
       </div>
     </div>
@@ -1225,12 +1193,11 @@
   
     // Countdown
     function updateCountdown() {
-      // Updated target date to end of May (May 31, 2025 23:59:59)
-      const targetDate = new Date("May 31, 2025 23:59:59").getTime();
+      const targetDate = new Date("April 2, 2025 00:00:00").getTime();
       const now = new Date().getTime();
       const distance = targetDate - now;
       if (distance < 0) {
-        document.getElementById("countdown").innerText = "[EXPIRED]";
+        document.getElementById("countdown").innerText = "";
         return;
       }
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -1291,50 +1258,47 @@
       }
   
       /* ----------------------------------------------------------------
-         README Page – Scrollable List Active Item with IntersectionObserver
+         README Page – Scrollable List Active Item & Image Scaling
+           This checks which list item is centered, adds an "active" class,
+           and scales the left-side image smoothly.
       ---------------------------------------------------------------- */
       const scrollableList = document.querySelector('.scrollable-list');
       if (scrollableList) {
-        const items = scrollableList.querySelectorAll('.list-item');
-
-        // Create IntersectionObserver to detect the most visible item
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const item = entry.target;
-              if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                // Remove active class from all items
-                items.forEach((i) => i.classList.remove('active'));
-                // Add active class to the most visible item
-                item.classList.add('active');
-              }
-            });
-          },
-          {
-            root: scrollableList,
-            threshold: [0.5, 0.75, 1.0], // Trigger when 50%, 75%, or 100% of the item is visible
-            rootMargin: '0px', // No margin needed
-          }
-        );
-
-        // Observe each list item
-        items.forEach((item) => observer.observe(item));
-
-        // Update the scaling of the left-side image based on the active item
-        function updateReadmeImageScale() {
-          const activeItem = scrollableList.querySelector('.list-item.active');
+        function updateActiveListItem() {
+          const items = scrollableList.querySelectorAll('.list-item');
+          const containerRect = scrollableList.getBoundingClientRect();
+          const containerCenterY = containerRect.top + containerRect.height / 2;
+          let closestItem = null;
+          let minDistance = Infinity;
+          items.forEach(item => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenterY = itemRect.top + itemRect.height / 2;
+            const distance = Math.abs(containerCenterY - itemCenterY);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestItem = item;
+            }
+          });
+          items.forEach(item => {
+            if (item === closestItem) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
+  
+          // Update the scaling of the left-side image based on minDistance
           const readmeImg = document.getElementById('readmeImage');
-          if (readmeImg && activeItem) {
-            const scale = 1.2; // Scale when active
-            readmeImg.style.transform = `scale(${scale})`;
-          } else if (readmeImg) {
-            readmeImg.style.transform = 'scale(1.0)';
+          if (readmeImg) {
+            const maxDistance = 50; // threshold in pixels
+            const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
+            const effectiveDistance = Math.min(minDistance, maxDistance);
+            const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
+            readmeImg.style.transform = "scale(" + scale + ")";
           }
         }
-
-        // Run initially and on scroll
-        updateReadmeImageScale();
-        scrollableList.addEventListener('scroll', updateReadmeImageScale);
+        scrollableList.addEventListener('scroll', updateActiveListItem);
+        updateActiveListItem();
       }
     });
   </script>
