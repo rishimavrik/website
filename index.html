@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-2FZ9S1WMP7');
   </script>
   <meta charset="UTF-8" />
@@ -314,7 +310,6 @@
       z-index: 1;
     }
 
-
     @keyframes fadeblink {
       0% {
         color: rgba(0, 0, 0, 1);
@@ -327,9 +322,9 @@
       }
     }
 
-  /* -----------------------------------
-     Bouncing Arrow Animation
-  ----------------------------------- */
+    /* -----------------------------------
+       Bouncing Arrow Animation
+    ----------------------------------- */
     .bouncing-arrow {
       animation: bounce 2s infinite;
       text-align: center;
@@ -350,7 +345,6 @@
         transform: translateY(-5px) rotate(180deg);
       }
     }
-
 
     /* -----------------------------------
        DRONE (HATCHET) UNIVERSAL STYLES
@@ -536,7 +530,7 @@
       margin: clamp(0.25rem, 1vw, 0.75rem) 0;
     }
     .hover-display p {
-      margin: 0;
+      margin:  navigational
       font-size: clamp(0.4rem, 1.5vw, 1rem);
     }
     .investor-info {
@@ -602,17 +596,20 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1rem;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+      background-color: transparent;
     }
     .list-item.active {
+      transform: scale(1);
       color: #000;
+      background-color: rgba(0, 0, 0, 0.1); /* Subtle background for highlighting */
+      font-weight: bold; /* Bolder text for active item */
     }
-    
     .list-item:not(.active) {
-      transform: scale(.99);
+      transform: scale(0.99);
       color: #aaa;
+      background-color: transparent;
     }
-
     .list-item-title h3 {
       margin: 0;
       margin-right: 0rem;
@@ -730,7 +727,7 @@
         width: 40vw;
       }
       .corner-text p {
-        font-size:  2vw;
+        font-size: 2vw;
         text-align: left;
         margin-left: 10%;
       }
@@ -757,7 +754,6 @@
         margin: 0;
         text-align: center;
         margin-top: 4vh;
-
       }
       .nomad-subtitle {
         display: none;
@@ -849,7 +845,6 @@
         margin-bottom: 6vh;
       }
 
-
       .center-top-logo {
         width: 45vw;
         margin-top: 6vh;
@@ -870,7 +865,6 @@
       .scrollable-list button.list-item {
         width: 90vw;
       }
-
       .readme-image {
         display: none;
       }
@@ -890,7 +884,7 @@
           </div>
           <div class="subtitle">
             <p>\\\\\\\<br>
-               Next-Gen Transport &amp; Cargo Logistics<br>
+               Next-Gen Transport & Cargo Logistics<br>
                Built for Real-World Impact</p>
             <br>
             <p>Solving the ‘Golden Hour’ problem<br>
@@ -916,7 +910,7 @@
         <div class="nomad-stats">
           <p>
             /ˈnōˌmad/<br>
-            &lt;A wanderer&gt;<br><br>
+            <A wanderer><br><br>
             MAVRIK’s first Passenger<br>
             vehicle - Built to prove the <br>
             concept of low-cost EVTOL <br>
@@ -954,10 +948,10 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('home')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('hatchet')">
-          HATCHET &gt;&gt;&gt;
+          HATCHET >>>
         </button>
       </div>
 
@@ -975,7 +969,7 @@
         <div class="drone-stats">
           <p>
             /ˈhaCHət/<br>
-            &lt;A versatile survival tool&gt;<br><br>
+            <A versatile survival tool><br><br>
             MAVRIK’s first production <br>
             vehicle disrupts current <br>
             contested logistics <br>
@@ -1008,10 +1002,10 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('nomad')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('team')">
-          TEAM &gt;&gt;&gt;
+          TEAM >>>
         </button>
       </div>
 
@@ -1021,10 +1015,10 @@
           <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIk Wordmark" class="center-top-logo" />
         </button>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('hatchet')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('readme')">
-          README &gt;&gt;&gt;
+          README >>>
         </button>
         <div class="team-container">
           <!-- Left team list: Existing members -->
@@ -1133,7 +1127,7 @@
                   <p>Maj. King, 2024</p>
                 </div>
               </button>
-               <button type="button" class="list-item" onclick="window.open('https://www.army.mil/article/228814/achieving_simultaneity_of_logistics_and_sustainment_on_the_decisive_action_battlefield_an_essentia', '_blank')">
+              <button type="button" class="list-item" onclick="window.open('https://www.army.mil/article/228814/achieving_simultaneity_of_logistics_and_sustainment_on_the_decisive_action_battlefield_an_essentia', '_blank')">
                 <div class="list-item-title">
                   <h3>Battlefield Logistics</h3>
                 </div>
@@ -1177,10 +1171,10 @@
           </div>
         </div>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('team')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('home')">
-          HOME &gt;&gt;&gt;
+          HOME >>>
         </button>
       </div>
     </div>
@@ -1297,47 +1291,50 @@
       }
   
       /* ----------------------------------------------------------------
-         README Page – Scrollable List Active Item & Image Scaling
-           This checks which list item is centered, adds an "active" class,
-           and scales the left-side image smoothly.
+         README Page – Scrollable List Active Item with IntersectionObserver
       ---------------------------------------------------------------- */
       const scrollableList = document.querySelector('.scrollable-list');
       if (scrollableList) {
-        function updateActiveListItem() {
-          const items = scrollableList.querySelectorAll('.list-item');
-          const containerRect = scrollableList.getBoundingClientRect();
-          const containerCenterY = containerRect.top + containerRect.height / 2;
-          let closestItem = null;
-          let minDistance = Infinity;
-          items.forEach(item => {
-            const itemRect = item.getBoundingClientRect();
-            const itemCenterY = itemRect.top + itemRect.height / 2;
-            const distance = Math.abs(containerCenterY - itemCenterY);
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestItem = item;
-            }
-          });
-          items.forEach(item => {
-            if (item === closestItem) {
-              item.classList.add('active');
-            } else {
-              item.classList.remove('active');
-            }
-          });
-  
-          // Update the scaling of the left-side image based on minDistance
+        const items = scrollableList.querySelectorAll('.list-item');
+
+        // Create IntersectionObserver to detect the most visible item
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const item = entry.target;
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                // Remove active class from all items
+                items.forEach((i) => i.classList.remove('active'));
+                // Add active class to the most visible item
+                item.classList.add('active');
+              }
+            });
+          },
+          {
+            root: scrollableList,
+            threshold: [0.5, 0.75, 1.0], // Trigger when 50%, 75%, or 100% of the item is visible
+            rootMargin: '0px', // No margin needed
+          }
+        );
+
+        // Observe each list item
+        items.forEach((item) => observer.observe(item));
+
+        // Update the scaling of the left-side image based on the active item
+        function updateReadmeImageScale() {
+          const activeItem = scrollableList.querySelector('.list-item.active');
           const readmeImg = document.getElementById('readmeImage');
-          if (readmeImg) {
-            const maxDistance = 50; // threshold in pixels
-            const scaleExtra = 0.2; // extra scale when centered (1.0 => 1.2)
-            const effectiveDistance = Math.min(minDistance, maxDistance);
-            const scale = 1.0 + ((maxDistance - effectiveDistance) / maxDistance) * scaleExtra;
-            readmeImg.style.transform = "scale(" + scale + ")";
+          if (readmeImg && activeItem) {
+            const scale = 1.2; // Scale when active
+            readmeImg.style.transform = `scale(${scale})`;
+          } else if (readmeImg) {
+            readmeImg.style.transform = 'scale(1.0)';
           }
         }
-        scrollableList.addEventListener('scroll', updateActiveListItem);
-        updateActiveListItem();
+
+        // Run initially and on scroll
+        updateReadmeImageScale();
+        scrollableList.addEventListener('scroll', updateReadmeImageScale);
       }
     });
   </script>
