@@ -304,6 +304,16 @@
       z-index: 1;
       animation: bobbing 1s infinite steps(2, end);
     }
+    .center-imag {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: clamp(300px, 80vw, 1600px);
+      height: auto;
+      z-index: 1;
+      animation: bobbing 1s infinite steps(2, end);
+    }
     .center-image-placeholder {
       position: absolute;
       top: 55%;
@@ -936,9 +946,7 @@
 
       <!-- Page 3: HATCHET -->
       <div class="page page-3" id="hatchet">
-        <div class="center-text-placeholder">
-          <p>COMING SOON</p>
-        </div>
+        <img src="./comps/hatchet.png" alt="Large Nomad Center Image" class="center-imag" />
         <div class="drone-title-block">
           <picture>
             <source media="(max-width: 765px)" srcset="./comps/hatchetmob.svg">
@@ -955,6 +963,14 @@
             market. Designed with <br>
             complete autonomy and <br>
             heavy lift power. <br>
+          </p>
+        </div>
+        <div class="nomad-stats-right">
+          <p>
+            Specs:<br><br><br>
+            Range = 510mi<br>
+            Payload Capacity = 600lbs<br>
+            Autonomy = FULL
           </p>
         </div>
         <div class="drone-stats-right">
@@ -976,10 +992,8 @@
           </div>
         </div>
         <div class="corner-content-right">
-          <p>BUILD STATUS: IN PROGRESS
-            <span class="dot-1">.</span>
-            <span class="dot-2">.</span>
-            <span class="dot-3">.</span>
+          <p>
+            BUILD STATUS: <span class="blink">COMPLETE</span><br>
           </p>
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
