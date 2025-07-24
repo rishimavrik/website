@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2FZ9S1WMP7');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FZ9S1WMP7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2FZ9S1WMP7');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -302,18 +298,28 @@
       max-width: clamp(150px, 50vw, 900px);
       height: auto;
       z-index: 1;
-      animation: bobbing 1s infinite steps(2, end);
     }
-    .center-imag {
-      position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: clamp(300px, 80vw, 1600px);
-      height: auto;
-      z-index: 1;
-      animation: bobbing 1s infinite steps(2, end);
-    }
+    .center-imagee {
+  position: absolute;
+  top: 60%; /* Keep your adjusted position */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: clamp(300px, 75vw, 1200px); /* Significantly larger */
+  height: auto;
+  z-index: 1;
+}
+
+/* Adjust for mobile devices */
+@media (max-width: 765px) {
+  .center-imagee {
+    top: 32%; /* Keep desktop position or adjust if needed */
+    left: 5%; /* Match existing mobile positioning from .center-image */
+    transform: rotate(10deg); /* Match existing mobile rotation */
+    max-width: clamp(250px, 100vw, 1300px); /* Much larger on mobile */
+    height: auto;
+    z-index: 1;
+  }
+}
     .center-image-placeholder {
       position: absolute;
       top: 55%;
@@ -323,7 +329,6 @@
       height: auto;
       z-index: 1;
     }
-
 
     @keyframes fadeblink {
       0% {
@@ -338,44 +343,16 @@
     }
 
     /* -----------------------------------
-       DRONE (HATCHET) UNIVERSAL STYLES
+       HATCHET PAGE-SPECIFIC STYLES (Now uses NOMAD classes)
     ----------------------------------- */
-    .drone-title-block {
-      position: absolute;
-      top: 5vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      z-index: 0;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-    }
-    .drone-title {
-      width: clamp(30rem, 65vw, 120rem);
-      height: auto;
-      margin-top: 5vh;
-    }
-    .drone-subtitle {
-      font-size: clamp(1rem, 5vw, 4rem);
-      text-align: right;
-    }
-    .drone-stats {
-      font-size: clamp(0.75rem, 2vw, 1.25rem);
-      position: absolute;
-      top: 43%;
-      left: 6vw;
-      transform: translateY(-50%);
-      text-align: left;
-    }
+    /* Obsolete drone styles retained for safety but hidden */
+    .drone-title-block,
+    .drone-title,
+    .drone-stats,
     .drone-stats-right {
-      font-size: clamp(0.75rem, 2vw, 2.25rem);
-      position: absolute;
-      top: 43%;
-      right: 6vw;
-      transform: translateY(-50%);
-      text-align: left;
+      display: none;
     }
+
     .corner-content-right {
       position: absolute;
       bottom: 15vh;  /* 15% of the viewport height */
@@ -713,16 +690,21 @@
         width: 40vw;
       }
       .corner-text p {
-        font-size:  2vw;
+        font-size: 2vw;
         text-align: left;
         margin-left: 10%;
       }
       .center-image {
         max-width: clamp(150px, 80vw, 1000px);
-        top: 30%;
+        top: 25%;
         left: 8%;
         transform: rotate(10deg);
-        animation: bobbingmob 1s infinite steps(2, end);
+      }
+      .center-imagee {
+        max-width: clamp(150px, 80vw, 1000px);
+        top: 30%;
+        left: 8%;
+        transform: rotate(-5deg);
       }
 
       .nav-button-left {
@@ -740,7 +722,6 @@
         margin: 0;
         text-align: center;
         margin-top: 4vh;
-
       }
       .nomad-subtitle {
         display: none;
@@ -748,57 +729,59 @@
       .nomad-stats-right {
         display: none;
       }
-      /* Hide the original text */
+      /* Hide the original text for both NOMAD and HATCHET */
       .nomad-stats p {
         visibility: hidden;
       }
-      .corner-content-right {
-        top: 26vh;
-        right: 15%;
-      }
-      
-      /* Insert new multi-line text using ::after */
-      .nomad-stats::after {
-        content: "NOMAD\A/ˈnōˌmad/\A<A wanderer>\A\A" 
+      /* NOMAD-specific mobile stats text */
+      #nomad .nomad-stats::after {
+        content: "NOMAD\A/ˈnōˌmad/\A<A wanderer>\A\A"
                  "MAVRIK’s first\A"
                  "Passenger Vehicle\A\A"
                  "Built to prove concept of low-cost EVTOL vehicles built for passenger transport";
-        white-space: pre-line; /* Makes \A line breaks work */
+        white-space: pre-line;
         position: absolute;
         left: 20%;
         top: 78%;
         text-align: left;
-        font-size: 2vw;  /* Adjust font size as needed */
-        color: inherit;  /* Inherit text color */
+        font-size: 2vw;
+        color: inherit;
       }
-
-      .drone-title {
-        width: 100%;
-        height: auto;
+      /* HATCHET-specific mobile stats text */
+      #hatchet .nomad-stats::after {
+        content: "HATCHET\A/ˈhaCHət/\A<A versatile survival tool>\A\A"
+                 "MAVRIK’s first production\A"
+                 "vehicle Disrupts current\A"
+                 "contested logistics market.\A"
+                 "Designed with complete\A"
+                 "autonomy and heavy lift power.";
+        white-space: pre-line;
+        position: absolute;
+        left: 20%;
+        top: 78%;
+        text-align: left;
+        font-size: 2vw;
+        color: inherit;
       }
-      .drone-title-block {
-        top: 10vh;
-      }
-      .time-style {
+      /* HATCHET countdown timer */
+      #hatchet .nomad-stats-right .time-style {
         font-size: 7vw;
+        position: absolute;
+        top: 26vh;
+        right: 15%;
+        text-align: right;
       }
-      .drone-stats-right {
-        top: 55vh;         /* Move it closer to the top */
-        bottom: auto;
-        left: 0;
-        right: 0;
-        transform: none;  /* Remove the vertical translation */
-        text-align: center;
-      }
-      .drone-stats {
-        display: none;
-      }
-      .center-text-placeholder p {
-        font-size: 8vh;
-        line-height: 85%;
-        top: 40vh;
-      }
+      /* Hide corner-content-right for both NOMAD and HATCHET */
+      #nomad .corner-content-right,
       #hatchet .corner-content-right {
+        top: 26vh;
+        right: 15%;
+      }
+      /* Remove obsolete HATCHET styles */
+      .drone-title,
+      .drone-title-block,
+      .drone-stats,
+      .drone-stats-right {
         display: none;
       }
 
@@ -831,7 +814,6 @@
         height: auto;
         margin-bottom: 6vh;
       }
-
 
       .center-top-logo {
         width: 45vw;
@@ -873,7 +855,7 @@
           </div>
           <div class="subtitle">
             <p>\\\\\\\<br>
-               Next-Gen Transport &amp; Cargo Logistics<br>
+               Next-Gen Transport & Cargo Logistics<br>
                Built for Real-World Impact</p>
             <br>
             <p>Solving the ‘Golden Hour’ problem<br>
@@ -899,7 +881,7 @@
         <div class="nomad-stats">
           <p>
             /ˈnōˌmad/<br>
-            &lt;A wanderer&gt;<br><br>
+            <A wanderer><br><br>
             MAVRIK’s first Passenger<br>
             vehicle - Built to prove the <br>
             concept of low-cost EVTOL <br>
@@ -937,26 +919,23 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('home')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('hatchet')">
-          HATCHET &gt;&gt;&gt;
+          HATCHET >>>
         </button>
       </div>
 
       <!-- Page 3: HATCHET -->
       <div class="page page-3" id="hatchet">
-        <img src="./comps/hatchet.png" alt="Large Nomad Center Image" class="center-imag" />
-        <div class="drone-title-block">
-          <picture>
-            <source media="(max-width: 765px)" srcset="./comps/hatchetmob.svg">
-            <img src="./comps/HATCHET.svg" alt="Large Hatchet Title" class="drone-title" />
-          </picture>          
+        <img src="./comps/hatchet.png" alt="Large Hatchet Center Image" class="center-imagee" />
+        <div class="nomad-title-block">
+          <div class="nomad-title">THE HATCHET</div>
         </div>
-        <div class="drone-stats">
+        <div class="nomad-stats">
           <p>
             /ˈhaCHət/<br>
-            &lt;A versatile survival tool&gt;<br><br>
+            <A versatile survival tool><br><br>
             MAVRIK’s first production <br>
             vehicle Disrupts current <br>
             contested logistics <br>
@@ -972,8 +951,6 @@
             Payload Capacity = 600lbs<br>
             Autonomy = FULL
           </p>
-        </div>
-        <div class="drone-stats-right">
           <div id="countdown" class="time-style">(0:00:00)</div>
         </div>
         <div class="corner-content">
@@ -998,23 +975,23 @@
           <img src="./comps/MAVRIKLogo.png" alt="MAVRIK Logo" class="bat-logo-small" />
         </div>
         <button class="nav-button nav-button-left" onclick="goToPage('nomad')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('team')">
-          TEAM &gt;&gt;&gt;
+          TEAM >>>
         </button>
       </div>
 
       <!-- Page 4: TEAM -->
       <div class="page page-4" id="team">
         <button class="centered-top-button" onclick="goToPage('home')">
-          <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIk Wordmark" class="center-top-logo" />
+          <img id="cornerLogoImage" src="./comps/MAVRIKWORDMARK.svg" alt="MAVRIK Wordmark" class="center-top-logo" />
         </button>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('hatchet')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('readme')">
-          README &gt;&gt;&gt;
+          README >>>
         </button>
         <div class="team-container">
           <!-- Left team list: Existing members -->
@@ -1095,7 +1072,7 @@
         </div>
       </div>
 
-      <!-- Page 5: README with Scrollable List (Updated for two-column layout with image) -->
+      <!-- Page 5: README with Scrollable List -->
       <div class="page page-5" id="readme">
         <div class="container">
           <h2 class="header-readme">README.</h2>
@@ -1153,10 +1130,10 @@
           </div>
         </div>
         <button class="nav-button nav-button-left-spec" onclick="goToPage('team')">
-          &lt;&lt;&lt; BACK
+          <<< BACK
         </button>
         <button class="nav-button nav-button-right" onclick="goToPage('home')">
-          HOME &gt;&gt;&gt;
+          HOME >>>
         </button>
       </div>
     </div>
