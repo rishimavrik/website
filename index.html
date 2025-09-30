@@ -1152,19 +1152,25 @@
       const wrapper = document.querySelector('.horizontal-scroll-wrapper');
       if (targetPage && wrapper) {
         if (window.innerWidth <= 765) {
-          wrapper.scroll({
-            left: 0,
-            top: targetPage.offsetTop,
-            behavior: 'smooth'
+          // Mobile: Vertical scrolling
+          targetPage.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start', // Align to the start of the target page
+            inline: 'nearest'
           });
+          // Debugging log to verify offsetTop
+          console.log(`Scrolling to ${pageId}, offsetTop: ${targetPage.offsetTop}`);
         } else {
-          // For horizontal layout on desktop
+          // Desktop: Horizontal scrolling
           wrapper.scroll({
             left: targetPage.offsetLeft,
             top: 0,
             behavior: 'smooth'
           });
+          console.log(`Scrolling to ${pageId}, offsetLeft: ${targetPage.offsetLeft}`);
         }
+      } else {
+        console.error(`Target page with ID ${pageId} or wrapper not found`);
       }
     }
   
