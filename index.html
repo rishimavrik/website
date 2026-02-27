@@ -103,7 +103,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.25);
     z-index: 1;
 }
 
@@ -739,13 +739,11 @@ body.scroll-locked {
 
     /* TEAM PAGE - MOBILE */
     #team {
-        padding: 50px 20px 30px;
-        height: 100vh;
-        height: 100dvh;
-        max-height: 100vh;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        padding: 50px 16px 16px;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: visible;
     }
 
     #team .eagle {
@@ -754,58 +752,19 @@ body.scroll-locked {
         width: 32px;
     }
 
-    .team-header { margin-bottom: 16px; flex-shrink: 0; }
-    .team-title { font-size: 24px; margin-bottom: 10px; }
-    .team-line { width: 90%; }
-    .team-content { gap: 16px; padding-top: 8px; flex-shrink: 0; }
-    .team-description { font-size: 14px; line-height: 1.3; }
-    .team-cta { gap: 6px; }
-    .team-cta-text { font-size: 12px; }
-    .apply-link { font-size: 12px; }
+    .team-header { margin-bottom: 16px; }
+    .team-title { font-size: 24px; }
 
-    .team-members {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 48px;
-        min-height: 0;
-        position: relative;
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: repeat(5, 1fr) !important;
+        gap: 10px !important;
+        min-height: 600px;
+        padding-bottom: 60px;
     }
 
-    .team-carousel {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .team-stage {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Mobile: hide side members, show only featured */
-    .team-member.side,
-    .team-member.side-far { display: none !important; }
-
-    .team-member.featured .member-image-container {
-        width: 200px;
-        height: 230px;
-    }
-
-    .team-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 18px;
-    }
-
-    .team-nav-left { left: 0; }
-    .team-nav-right { right: 0; }
+    .team-card-role { font-size: 9px !important; }
+    .team-card-name { font-size: 13px !important; }
 
     /* NEWS */
     #news {
@@ -860,11 +819,12 @@ body.scroll-locked {
 
     .card-image { flex: 1; min-height: 0; }
     .card-accent { height: 4px; flex-shrink: 0; }
-    .card-content { min-height: auto; padding: 14px 12px; flex-shrink: 0; }
-    .card-title { font-size: 15px; margin-bottom: 8px; line-height: 1.2; }
-    .card-publication { font-size: 9px; }
-    .card-author { font-size: 11px; }
-    .card-date { font-size: 10px; }
+    /* CHANGE 1: fixed card-content vertical clipping on mobile */
+    .card-content { min-height: 0; padding: 10px 12px; flex-shrink: 0; }
+    .card-title { font-size: 13px; margin-bottom: 6px; line-height: 1.2; }
+    .card-publication { font-size: 8px; }
+    .card-author { font-size: 10px; }
+    .card-date { font-size: 9px; }
     .card-arrow { width: 28px; height: 28px; font-size: 12px; top: 10px; right: 10px; }
 
     .our-articles-btn {
@@ -959,204 +919,114 @@ body.scroll-locked {
     color: #fff;
     display: flex;
     flex-direction: column;
-    padding: 60px 48px 32px;
+    padding: 48px;
+    overflow: hidden;
 }
 
 .team-header {
-    text-align: center;
-    margin-bottom: 24px;
+    text-align: left;
+    margin-bottom: 32px;
     flex-shrink: 0;
 }
 
 .team-title {
     font-size: clamp(32px, 4vw, 48px);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.12em;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .team-line {
-    width: 80%;
-    max-width: 1100px;
+    width: 100%;
+    max-width: 600px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.4);
-    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scaleX(0);
+    transform-origin: left;
 }
 
-.team-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-    padding-top: 8px;
-    flex-shrink: 0;
+.team-line.animated {
+    animation: lineGrow 0.8s ease forwards;
 }
 
-.team-description {
-    font-size: clamp(14px, 1.4vw, 18px);
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: 0.02em;
-}
-
-.team-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.team-cta-text {
-    font-size: clamp(14px, 1.4vw, 18px);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-}
-
-.apply-link {
-    color: #DFFC1E;
-    font-size: clamp(12px, 1.2vw, 16px);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    padding-bottom: 4px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s ease;
-    cursor: pointer;
-}
-
-.apply-link:hover { border-bottom-color: #DFFC1E; }
-
-.team-members {
+.team-grid {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 60px;
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
     min-height: 0;
+    padding-bottom: 80px;
 }
 
-/* ---------- TEAM CAROUSEL ---------- */
-.team-carousel {
+.team-card {
     position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.team-stage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    width: 100%;
-}
-
-/* All members hidden by default; JS adds .visible */
-.team-member {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: #fff;
-    gap: 6px;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: opacity 0.3s ease;
-}
-
-.team-member.visible {
-    display: flex;
-}
-
-.member-image-container {
+    background-size: cover;
+    background-position: center 20%;
+    border-radius: 2px;
     overflow: hidden;
-    margin-bottom: 8px;
-    width: 180px;
-    height: 200px;
-    transition: width 0.35s ease, height 0.35s ease;
-}
-
-.member-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.member-name {
-    font-size: clamp(12px, 1.2vw, 16px);
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 0.3s ease;
-}
-
-.member-subtitle {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    opacity: 0;
-    min-height: 1em;
-    transition: opacity 0.3s ease;
-}
-
-/* Featured center member */
-.team-member.featured .member-image-container {
-    width: 300px;
-    height: 340px;
-}
-
-.team-member.featured .member-name {
-    opacity: 1;
-    font-weight: 600;
-    font-size: clamp(14px, 1.4vw, 20px);
-}
-
-.team-member.featured .member-subtitle {
-    opacity: 0.6;
-}
-
-/* Side members — adjacent to center */
-.team-member.side {
-    opacity: 0.5;
-}
-
-/* Far side members — outermost on desktop */
-.team-member.side-far {
-    opacity: 0.3;
-}
-
-.team-member.side .member-image-container {
-    width: 180px;
-    height: 200px;
-}
-
-.team-member.side-far .member-image-container {
-    width: 140px;
-    height: 160px;
-}
-
-/* Nav arrows */
-.team-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    opacity: 0.5;
     cursor: pointer;
-    transition: opacity 0.3s ease;
-    z-index: 10;
-    font-family: 'Clash Display', Arial, Helvetica, sans-serif;
-    font-style: normal;
-    user-select: none;
+    display: block;
+    text-decoration: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
-.team-nav:hover { opacity: 1; }
-.team-nav-left { left: 0; }
-.team-nav-right { right: 0; }
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: inherit;
+    background-size: cover;
+    background-position: center 20%;
+    transition: transform 0.6s ease;
+}
+
+.team-card:hover::before { transform: scale(1.05); }
+
+.team-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 55%;
+    background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.team-card-info {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    z-index: 2;
+}
+
+.team-card-role {
+    font-size: clamp(9px, 0.75vw, 11px);
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.team-card-name {
+    font-size: clamp(13px, 1.1vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+    display: block;
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .team-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+    }
+    .team-card-name { font-size: 13px; }
+}
 
 /* ---------- DETAIL PAGE OVERLAY ---------- */
 .detail-overlay {
@@ -1483,18 +1353,22 @@ body.scroll-locked {
 
 .cards-scroll-container::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
+/* CHANGE 1: align-items stretch so cards fill height properly */
 .cards-wrapper {
     display: flex;
     gap: 28px;
     padding: 16px 4px;
     height: 100%;
+    align-items: stretch;
 }
 
+/* CHANGE 1: min-height 0 so card can shrink on short viewports */
 .article-card {
     pointer-events: auto;
     position: relative;
     width: 380px;
     height: 100%;
+    min-height: 0;
     flex-shrink: 0;
     cursor: pointer;
     text-decoration: none;
@@ -1518,10 +1392,11 @@ body.scroll-locked {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* CHANGE 1: min-height reduced so image doesn't force overflow on short screens */
 .card-image {
     position: relative;
     flex: 1;
-    min-height: 200px;
+    min-height: 80px;
     overflow: hidden;
     border-radius: 4px 4px 0 0;
 }
@@ -1543,6 +1418,7 @@ body.scroll-locked {
 
 .article-card:hover .card-accent { height: 10px; }
 
+/* CHANGE 1: min-height 0 so content shrinks instead of clipping */
 .card-content {
     background: #212121;
     padding: 24px 22px;
@@ -1553,7 +1429,7 @@ body.scroll-locked {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     flex-shrink: 0;
-    min-height: 160px;
+    min-height: 0;
 }
 
 .article-card:hover .card-content {
@@ -1682,7 +1558,6 @@ body.scroll-locked {
 @media (max-width: 768px) {
     #news { padding: 32px 24px; }
     .article-card { width: 320px; }
-    .card-content { min-height: 140px; }
     .our-articles-btn { bottom: 32px; right: 24px; left: 24px; justify-content: center; }
 }
 
@@ -1908,6 +1783,51 @@ body.scroll-locked {
 }
 
 .contact-footer-link:hover { opacity: 1; color: #fff; }
+
+/* ---------- CAREERS BUTTON ---------- */
+.careers-btn {
+    position: absolute;
+    bottom: 48px;
+    right: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 28px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    text-decoration: none;
+    z-index: 5;
+}
+
+.careers-btn.animated { animation: fadeIn 0.6s ease forwards; }
+
+.careers-btn:hover {
+    background: #fff;
+    color: #212121;
+    border-color: #fff;
+}
+
+.careers-btn span { transition: transform 0.3s ease; }
+.careers-btn:hover span { transform: translate(4px, -4px); }
+
+@media (max-width: 768px) {
+    .careers-btn {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        justify-content: center;
+        font-size: 11px;
+        padding: 12px 20px;
+    }
+}
 </style>
 </head>
 
@@ -2056,12 +1976,10 @@ body.scroll-locked {
                         <div class="feature-title">Versatile</div>
                         <div class="feature-text">HATCHET excels across diverse missions with pickup-truck-style modularity, transporting heavy or awkward payloads over long distances.</div>
                     </div>
-
                     <div class="detail-feature">
                         <div class="feature-title">Hovering</div>
                         <div class="feature-text">HATCHET flies purely vertical — holding/aiming directed electronics, long-line payload pickup, and low/complex stealth routes. Minimal aero constraints for arbitrary payloads.</div>
                     </div>
-
                     <div class="detail-feature">
                         <div class="feature-title">Large-Scale</div>
                         <div class="feature-text">HATCHET packs densely into containers, networks for fully automatic distributed logistics, deploys other autonomous systems, and relays tracks/data via SATCOM.</div>
@@ -2183,21 +2101,19 @@ body.scroll-locked {
             <div class="detail-left">
                 <img src="logo-eagle-black.png" class="eagle detail-anim detail-anim-eagle" alt="Eagle Logo">
                 <div class="detail-header">
-                <span class="detail-title detail-anim detail-anim-type" data-text="CHORUS"></span>
-                <span class="detail-subtitle detail-anim detail-anim-type-sub" data-text="/// DISTRIBUTED INTELLIGENCE|GATHERING"></span>
-            </div>
-            <div class="detail-divider detail-anim detail-anim-content"></div>
+                    <span class="detail-title detail-anim detail-anim-type" data-text="CHORUS"></span>
+                    <span class="detail-subtitle detail-anim detail-anim-type-sub" data-text="/// DISTRIBUTED INTELLIGENCE|GATHERING"></span>
+                </div>
+                <div class="detail-divider detail-anim detail-anim-content"></div>
                 <div class="detail-features detail-anim detail-anim-content">
                     <div class="detail-feature">
                         <div class="feature-title">Collaborative</div>
                         <div class="feature-text">CHORUS fuses visual, acoustic, and radio data into precise composite tracks. Configurable for self-deployment, maritime use, or strategic manual placement.</div>
                     </div>
-
                     <div class="detail-feature">
                         <div class="feature-title">Enduring</div>
                         <div class="feature-text">CHORUS runs weeks on large batteries, solar power, and low-power passive sensors. Distributed architecture avoids single-point dependency across wide areas.</div>
                     </div>
-
                     <div class="detail-feature">
                         <div class="feature-title">Low-Cost</div>
                         <div class="feature-text">CHORUS spaces inexpensive optical, sonic, and radio sensors to create synthetic apertures and 3D triangulation — delivering accurate tracks at a price that supports high-risk missions.</div>
@@ -2275,101 +2191,109 @@ body.scroll-locked {
 
     <img src="logo-eagle.png" class="eagle fade-in" alt="Eagle Logo" onclick="document.getElementById('landing').scrollIntoView({ behavior: 'smooth' })" style="cursor: pointer;">
 
-    <!-- Header -->
+    <!-- CHANGE 2: added team-line div below title -->
     <div class="team-header">
         <div class="team-title type-animation" data-text="TEAM"></div>
         <div class="team-line"></div>
     </div>
 
-    <!-- Content -->
-    <div class="team-content fade-in">
-        <p class="team-description">
-            We are a group dedicated to bring you the best solutions<br>
-            to make your job easier
-        </p>
+    <div class="team-grid fade-in">
 
-        <div class="team-cta">
-            <p class="team-cta-text">If you want to help protect our country and love technology</p>
-            <span class="apply-link" onclick="window.location.href='#'">
-                APPLY NOW
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline; vertical-align: middle; margin-left: 4px;">
-                    <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-        </div>
-    </div>
-
-    <!-- Team members -->
-    <div class="team-members fade-in">
-
-        <div class="team-carousel">
-            <span class="team-nav team-nav-left" onclick="switchTeamPage(-1)">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 7H3M3 7L7 3M3 7L7 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-
-            <div class="team-stage">
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/rishi-mannava-10a045223/')">
-                    <div class="member-image-container"><img src="rishi.png" alt="Rishi Mannava" class="member-image"></div>
-                    <span class="member-name">RISHI MANNAVA</span>
-                    <span class="member-subtitle">COO</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/jtklenke/')">
-                    <div class="member-image-container"><img src="jt.png" alt="JT Klenke" class="member-image"></div>
-                    <span class="member-name">JT KLENKE</span>
-                    <span class="member-subtitle">CSE</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/maxhowens/')">
-                    <div class="member-image-container"><img src="max.png" alt="Max Owens" class="member-image"></div>
-                    <span class="member-name">MAX OWENS</span>
-                    <span class="member-subtitle">CEO</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/ryan-ellis-320746219/')">
-                    <div class="member-image-container"><img src="ryan.png" alt="Ryan Ellis" class="member-image"></div>
-                    <span class="member-name">RYAN ELLIS</span>
-                    <span class="member-subtitle">CTO</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/mosaia/')">
-                    <div class="member-image-container"><img src="mohamed.png" alt="Mohamed Ahmed" class="member-image"></div>
-                    <span class="member-name">MOHAMED AHMED</span>
-                    <span class="member-subtitle">HEAD OF MEDIA</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/wh474/')">
-                    <div class="member-image-container"><img src="weiyi.png" alt="Weiyi Huang" class="member-image"></div>
-                    <span class="member-name">WEIYI HUANG</span>
-                    <span class="member-subtitle">LEAD ELECTRICAL ENGINEER</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/nathan-sheng-44a3852bb/')">
-                    <div class="member-image-container"><img src="nathan.png" alt="Nathan Shang" class="member-image"></div>
-                    <span class="member-name">NATHAN SHANG</span>
-                    <span class="member-subtitle">LEAD MECHANICAL ENGINEER</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/joelbeam5326/')">
-                    <div class="member-image-container"><img src="joel.png" alt="Joel Beam" class="member-image"></div>
-                    <span class="member-name">JOEL BEAM</span>
-                    <span class="member-subtitle">HEAD OF STRATEGY</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/tech-tim/')">
-                    <div class="member-image-container"><img src="tim.png" alt="Tim Chrisman" class="member-image"></div>
-                    <span class="member-name">TIM CHRISMAN</span>
-                    <span class="member-subtitle">GOVERNMENT GROWTH</span>
-                </div>
-                <div class="team-member" onclick="window.open('https://www.linkedin.com/in/justin-sadeghian-a4685741/')">
-                    <div class="member-image-container"><img src="justin.png" alt="Justin Sadeghian" class="member-image"></div>
-                    <span class="member-name">JUSTIN SADEGHIAN</span>
-                    <span class="member-subtitle">PARTNERSHIPS LEAD</span>
-                </div>
+        <!-- CHANGE 1: all team-card <a> tags keep href for JS to use, link preview suppressed via JS -->
+        <a class="team-card" href="https://www.linkedin.com/in/maxhowens/" target="_blank"
+           style="background-image: url('max.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">CEO</span>
+                <span class="team-card-name">Max Owens</span>
             </div>
+        </a>
 
-            <span class="team-nav team-nav-right" onclick="switchTeamPage(1)">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-        </div>
+        <a class="team-card" href="https://www.linkedin.com/in/ryan-ellis-320746219/" target="_blank"
+           style="background-image: url('ryan.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">CTO</span>
+                <span class="team-card-name">Ryan Ellis</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/rishi-mannava-10a045223/" target="_blank"
+           style="background-image: url('rishi.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">COO</span>
+                <span class="team-card-name">Rishi Mannava</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/jtklenke/" target="_blank"
+           style="background-image: url('jt.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Head of Software</span>
+                <span class="team-card-name">JT Klenke</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/mosaia/" target="_blank"
+           style="background-image: url('mohamed.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Head of Media</span>
+                <span class="team-card-name">Mohamed Ahmed</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/wh474/" target="_blank"
+           style="background-image: url('weiyi.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Head of Electrical</span>
+                <span class="team-card-name">Weiyi Huang</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/nathan-sheng-44a3852bb/" target="_blank"
+           style="background-image: url('nathan.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Lead Mechanical Engineer</span>
+                <span class="team-card-name">Nathan Shang</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/tech-tim/" target="_blank"
+           style="background-image: url('tim.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Government Growth</span>
+                <span class="team-card-name">Tim Chrisman</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/joelbeam5326/" target="_blank"
+           style="background-image: url('joel.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Business Development</span>
+                <span class="team-card-name">Joel Beam</span>
+            </div>
+        </a>
+
+        <a class="team-card" href="https://www.linkedin.com/in/justin-sadeghian-a4685741/" target="_blank"
+           style="background-image: url('justin.png')">
+            <div class="team-card-info">
+                <span class="team-card-role">Partnerships</span>
+                <span class="team-card-name">Justin Sadeghian</span>
+            </div>
+        </a>
 
     </div>
+
+    <a class="careers-btn" href="https://www.linkedin.com/company/mavrikinc/jobs/" target="_blank" rel="noopener noreferrer">
+        CAREERS
+        <span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+    </a>
+
+</section>
+
+<!-- ========== NEWS & ARTICLES PAGE ========== -->
 
 </section>
 
@@ -2605,6 +2529,7 @@ body.scroll-locked {
         </div>
     </div>
 </section>
+
 <script>
 /* ---------- Section Animation Tracking ---------- */
 const animatedSections = new Set();
@@ -2659,11 +2584,13 @@ function animateTeam() {
     const title = document.querySelector('#team .team-title.type-animation');
     if (title) typeText(title, 50);
     const eagle = document.querySelector('#team .eagle.fade-in');
-    const content = document.querySelector('#team .team-content.fade-in');
-    const members = document.querySelector('#team .team-members.fade-in');
+    const grid = document.querySelector('#team .team-grid.fade-in');
+    const line = document.querySelector('#team .team-line');
+    const careersBtn = document.querySelector('#team .careers-btn');
     setTimeout(() => { if (eagle) eagle.classList.add('animated'); }, 200);
-    setTimeout(() => { if (content) content.classList.add('animated'); }, 400);
-    setTimeout(() => { if (members) members.classList.add('animated'); }, 600);
+    setTimeout(() => { if (line) line.classList.add('animated'); }, 300);
+    setTimeout(() => { if (grid) grid.classList.add('animated'); }, 400);
+    setTimeout(() => { if (careersBtn) careersBtn.classList.add('animated'); }, 1100);
 }
 
 /* ---------- News Page Animations ---------- */
@@ -2878,73 +2805,6 @@ document.addEventListener('touchmove', e => {
     if (document.body.classList.contains('scroll-locked')) e.preventDefault();
 }, { passive: false });
 
-/* ==========================================================
-   TEAM CAROUSEL — flat array, infinite loop, responsive
-   Desktop: 5 visible (center + 2 each side)
-   Tablet (<=1100px): 3 visible (center + 1 each side)
-   Mobile (<=768px): 1 visible (center only)
-   ========================================================== */
-let currentFeaturedIndex = 2; // start on Max Owens (index 2)
-
-function getTeamMembers() {
-    return Array.from(document.querySelectorAll('.team-stage .team-member'));
-}
-
-function getSideCount() {
-    if (window.innerWidth <= 768) return 0;
-    if (window.innerWidth <= 1350) return 1;
-    return 2;
-}
-
-function renderTeam() {
-    const members = getTeamMembers();
-    const total = members.length;
-    const sideCount = getSideCount();
-
-    // Reset all
-    members.forEach(m => {
-        m.classList.remove('featured', 'side', 'side-far', 'visible');
-        m.style.display = 'none';
-        m.style.order = '';
-    });
-
-    // Show center + sideCount on each side, always wrapping
-    // offset: -2, -1, 0, 1, 2  →  order: 1, 2, 3, 4, 5
-    for (let offset = -sideCount; offset <= sideCount; offset++) {
-        const idx = (currentFeaturedIndex + offset + total) % total;
-        const member = members[idx];
-        member.style.display = 'flex';
-        member.classList.add('visible');
-        // order puts them left→right visually regardless of DOM position
-        member.style.order = offset + sideCount + 1;
-
-        if (offset === 0) {
-            member.classList.add('featured');
-        } else if (Math.abs(offset) === 2) {
-            member.classList.add('side', 'side-far');
-        } else {
-            member.classList.add('side');
-        }
-    }
-}
-
-function switchTeamPage(direction) {
-    const total = getTeamMembers().length;
-    currentFeaturedIndex = (currentFeaturedIndex + direction + total) % total;
-    renderTeam();
-}
-
-// Prevent text selection when clicking nav arrows
-document.addEventListener('DOMContentLoaded', () => {
-    const teamMembers = document.querySelector('.team-members');
-    if (teamMembers) {
-        teamMembers.addEventListener('mousedown', e => e.preventDefault());
-    }
-    renderTeam();
-});
-
-window.addEventListener('resize', renderTeam);
-
 /* ---------- Custom Scroll Track ---------- */
 function initCustomScrollTrack() {
     const scrollContainer = document.querySelector('#news .cards-scroll-container');
@@ -3044,6 +2904,39 @@ function checkOverflow() {
 
 window.addEventListener('resize', checkOverflow);
 setInterval(checkOverflow, 500);
+
+/* ---------- Suppress link preview on careers button ---------- */
+const careersBtn = document.querySelector('.careers-btn');
+if (careersBtn) {
+    careersBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this._href || this.href;
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    careersBtn.addEventListener('mouseenter', function() {
+        this._href = this.href;
+        this.removeAttribute('href');
+    });
+    careersBtn.addEventListener('mouseleave', function() {
+        if (this._href) this.setAttribute('href', this._href);
+    });
+}
+
+/* ---------- CHANGE 1: Suppress link preview on team cards ---------- */
+document.querySelectorAll('.team-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this._href || this.href;
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    });
+    card.addEventListener('mouseenter', function() {
+        this._href = this.href;
+        this.removeAttribute('href');
+    });
+    card.addEventListener('mouseleave', function() {
+        if (this._href) this.setAttribute('href', this._href);
+    });
+});
 </script>
 
 </body>
