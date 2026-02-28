@@ -1830,7 +1830,6 @@ body.scroll-locked {
 }
 </style>
 </head>
-
 <body>
 <!-- ========== LANDING ========== -->
 <section id="landing">
@@ -1996,7 +1995,7 @@ body.scroll-locked {
                     <img src="hatchet-wireframe.png" alt="Hatchet Wireframe">
                 </div>
                 <img src="hatchet-stats.png" class="detail-stats detail-anim detail-anim-right" alt="Hatchet Stats">
-                <button class="slick-sheet-btn detail-anim detail-anim-right">
+                <button class="slick-sheet-btn detail-anim detail-anim-right" onclick="downloadSlickSheet('hatchet-slicksheet.png')">
                     SLICK SHEET
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline; vertical-align: middle; margin-left: 6px;">
                         <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2063,7 +2062,7 @@ body.scroll-locked {
                     <img src="dart-wireframe.png" alt="Dart Wireframe">
                 </div>
                 <img src="dart-stats.png" class="detail-stats detail-anim detail-anim-right" alt="Dart Stats">
-                <button class="slick-sheet-btn detail-anim detail-anim-right">
+                <button class="slick-sheet-btn detail-anim detail-anim-right" onclick="downloadSlickSheet('dart-slicksheet.png')">
                     SLICK SHEET
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline; vertical-align: middle; margin-left: 6px;">
                         <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2130,7 +2129,7 @@ body.scroll-locked {
                     <img src="chorus-wireframe.png" alt="Chorus Wireframe">
                 </div>
                 <img src="chorus-stats.png" class="detail-stats detail-anim detail-anim-right" alt="Chorus Stats">
-                <button class="slick-sheet-btn detail-anim detail-anim-right">
+                <button class="slick-sheet-btn detail-anim detail-anim-right" onclick="downloadSlickSheet('chorus-slicksheet.png')">
                     SLICK SHEET
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline; vertical-align: middle; margin-left: 6px;">
                         <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2191,7 +2190,6 @@ body.scroll-locked {
 
     <img src="logo-eagle.png" class="eagle fade-in" alt="Eagle Logo" onclick="document.getElementById('landing').scrollIntoView({ behavior: 'smooth' })" style="cursor: pointer;">
 
-    <!-- CHANGE 2: added team-line div below title -->
     <div class="team-header">
         <div class="team-title type-animation" data-text="TEAM"></div>
         <div class="team-line"></div>
@@ -2199,7 +2197,6 @@ body.scroll-locked {
 
     <div class="team-grid fade-in">
 
-        <!-- CHANGE 1: all team-card <a> tags keep href for JS to use, link preview suppressed via JS -->
         <a class="team-card" href="https://www.linkedin.com/in/maxhowens/" target="_blank"
            style="background-image: url('max.png')">
             <div class="team-card-info">
@@ -2294,13 +2291,9 @@ body.scroll-locked {
 </section>
 
 <!-- ========== NEWS & ARTICLES PAGE ========== -->
-
-</section>
-
-<!-- ========== NEWS & ARTICLES PAGE ========== -->
 <section id="news">
     <img src="logo-eagle-black.png" class="eagle eagle-black fade-in" alt="Eagle Logo" onclick="document.getElementById('landing').scrollIntoView({ behavior: 'smooth' })" style="cursor: pointer;">
-    
+
     <div class="news-header">
         <h2 class="news-title type-animation" data-text="NEWS & ARTICLES"></h2>
         <div class="news-line"></div>
@@ -2309,9 +2302,9 @@ body.scroll-locked {
     <div class="news-content">
         <div class="cards-scroll-container">
             <div class="cards-wrapper">
-                
+
                 <!-- Card 1: Golden Hour -->
-                <div class="article-card" 
+                <div class="article-card"
                    data-color="orange"
                    data-href="https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12">
                     <div class="card-image">
@@ -2334,9 +2327,9 @@ body.scroll-locked {
                         </svg>
                     </div>
                 </div>
-                
+
                 <!-- Card 2: Contested Logistics -->
-                <div class="article-card" 
+                <div class="article-card"
                    data-color="magenta"
                    data-href="https://www.army.mil/article/272922/contested_logistics_environment_defined">
                     <div class="card-image">
@@ -2359,9 +2352,9 @@ body.scroll-locked {
                         </svg>
                     </div>
                 </div>
-                
+
                 <!-- Card 3: Battlefield Logistics -->
-                <div class="article-card" 
+                <div class="article-card"
                    data-color="purple"
                    data-href="https://www.army.mil/article/228814/achieving_simultaneity_of_logistics_and_sustainment_on_the_decisive_action_battlefield_an_essentia">
                     <div class="card-image">
@@ -2384,9 +2377,9 @@ body.scroll-locked {
                         </svg>
                     </div>
                 </div>
-                
+
                 <!-- Card 4: Optionally Piloted Helicopters -->
-                <div class="article-card" 
+                <div class="article-card"
                    data-color="burgundy"
                    data-href="https://www.doi.gov/sites/doi.gov/files/uploads/doi_uas_background_info_paper_gamechanger_the_promise_of_optionally-piloted_helicopters_in_wildland_fire_08_2018.pdf">
                     <div class="card-image">
@@ -2409,9 +2402,9 @@ body.scroll-locked {
                         </svg>
                     </div>
                 </div>
-                
+
                 <!-- Card 5: Heavy Lift Helicopter Teams -->
-                <div class="article-card" 
+                <div class="article-card"
                    data-color="teal"
                    data-href="https://web.stanford.edu/group/scpnt/pnt/PNT09/student_posters/4_Smith_Heavy_Lift_Helicopter.pdf">
                     <div class="card-image">
@@ -2434,10 +2427,10 @@ body.scroll-locked {
                         </svg>
                     </div>
                 </div>
-                
+
             </div>
         </div>
-        
+
         <!-- Custom Scroll Track -->
         <div class="scroll-track-container">
             <div class="scroll-track">
@@ -2446,9 +2439,7 @@ body.scroll-locked {
         </div>
     </div>
 
-    <button class="our-articles-btn">
-        OUR ARTICLES
-        <span>
+    <button class="our-articles-btn">OUR ARTICLES <span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -2482,7 +2473,7 @@ body.scroll-locked {
     <!-- Dark main area -->
     <div class="contact-main">
         <img src="logo-eagle.png" class="contact-bg-eagle" alt="">
-        
+
         <div class="contact-bottom">
             <div class="contact-left">
                 <!-- Contact column -->
@@ -2517,7 +2508,7 @@ body.scroll-locked {
                     </div>
                 </div>
             </div>
-            
+
             <div class="contact-right">
                 <img src="logo-text.png" class="contact-logo" alt="MAVRIK">
                 <div class="contact-footer">
@@ -2805,6 +2796,143 @@ document.addEventListener('touchmove', e => {
     if (document.body.classList.contains('scroll-locked')) e.preventDefault();
 }, { passive: false });
 
+/* ---------- Slick Sheet Download ---------- */
+function downloadSlickSheet(filename) {
+    const a = document.createElement('a');
+    a.href = filename;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+/* ---------- Our Articles Toggle ---------- */
+const externalArticlesData = [
+    {
+        color: 'orange',
+        href: 'https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12',
+        image: 'golden-hour.png', alt: 'Golden Hour',
+        title: 'Golden Hour',
+        publication: 'Business Insider', author: 'Baker and Pickrell', date: '2024'
+    },
+    {
+        color: 'magenta',
+        href: 'https://www.army.mil/article/272922/contested_logistics_environment_defined',
+        image: 'contested-logistics.png', alt: 'Contested Logistics',
+        title: 'Contested Logistics',
+        publication: 'U.S. Army', author: 'Maj. King', date: '2024'
+    },
+    {
+        color: 'purple',
+        href: 'https://www.army.mil/article/228814/achieving_simultaneity_of_logistics_and_sustainment_on_the_decisive_action_battlefield_an_essentia',
+        image: 'battlefield-logistics.png', alt: 'Battlefield Logistics',
+        title: 'Battlefield Logistics',
+        publication: 'U.S. Army', author: 'Lt. Col. Mike Hammond', date: '2019'
+    },
+    {
+        color: 'burgundy',
+        href: 'https://www.doi.gov/sites/doi.gov/files/uploads/doi_uas_background_info_paper_gamechanger_the_promise_of_optionally-piloted_helicopters_in_wildland_fire_08_2018.pdf',
+        image: 'optionally-piloted-helicopters.png', alt: 'Optionally Piloted Helicopters',
+        title: 'Optionally Piloted Helicopters',
+        publication: 'U.S. D.O.I.', author: 'Department of Interior', date: '2018'
+    },
+    {
+        color: 'teal',
+        href: 'https://web.stanford.edu/group/scpnt/pnt/PNT09/student_posters/4_Smith_Heavy_Lift_Helicopter.pdf',
+        image: 'heavy-lift-helicopter-teams.png', alt: 'Heavy Lift Helicopter Teams',
+        title: 'Heavy Lift Helicopter Teams',
+        publication: 'Stanford University', author: 'Smith', date: '2011'
+    }
+];
+
+const ourArticlesData = [
+    {
+        color: 'teal',
+        href: 'https://www.linkedin.com/pulse/mavrik-secures-2m-us-army-sbir-advance-autonomous-heavy-lift-vuydc?trackingId=wdljOL6cRjixXBpPNmkhcw%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BoXZ8%2Fnt6ToyA%2BLRzYV%2Bu%2Fg%3D%3D',
+        image: 'sbir.png', alt: 'MAVRIK Awarded $2M SBIR',
+        title: 'MAVRIK Awarded $2M SBIR',
+        publication: 'LinkedIn', author: 'MAVRIK', date: '02/26/26'
+    }
+];
+
+let showingOurArticles = false;
+
+function buildCards(data) {
+    const arrowSVG = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    return data.map(d => `
+        <div class="article-card" data-color="${d.color}" data-href="${d.href}" style="opacity:0;transform:translateY(30px);">
+            <div class="card-image"><img src="${d.image}" alt="${d.alt}"></div>
+            <div class="card-accent"></div>
+            <div class="card-content">
+                <div>
+                    <h3 class="card-title">${d.title}</h3>
+                    <div class="card-meta">
+                        <span class="card-publication">${d.publication}</span>
+                        <span class="card-author">${d.author}</span>
+                        <span class="card-date">${d.date}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">${arrowSVG}</div>
+        </div>
+    `).join('');
+}
+
+function attachCardClickHandlers(wrapper) {
+    wrapper.querySelectorAll('.article-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const url = card.dataset.href;
+            if (url) window.open(url, '_blank');
+        });
+    });
+}
+
+function animateCardsIn(wrapper) {
+    const cards = wrapper.querySelectorAll('.article-card');
+    cards.forEach((card, i) => {
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, i * 100);
+    });
+}
+
+function animateCardsOut(wrapper, callback) {
+    const cards = wrapper.querySelectorAll('.article-card');
+    cards.forEach((card, i) => {
+        card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+        card.style.transitionDelay = `${i * 60}ms`;
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+    });
+    setTimeout(callback, cards.length * 60 + 380);
+}
+
+const ourArticlesBtn = document.querySelector('#news .our-articles-btn');
+if (ourArticlesBtn) {
+    ourArticlesBtn.addEventListener('click', () => {
+        const wrapper = document.querySelector('#news .cards-wrapper');
+        if (!wrapper) return;
+
+        animateCardsOut(wrapper, () => {
+            showingOurArticles = !showingOurArticles;
+            const newData = showingOurArticles ? ourArticlesData : externalArticlesData;
+            wrapper.innerHTML = buildCards(newData);
+            attachCardClickHandlers(wrapper);
+
+            // Update button label — replace text node only, keep the SVG span
+            const btn = document.querySelector('#news .our-articles-btn');
+            btn.childNodes[0].textContent = showingOurArticles ? 'READ ME ' : 'OUR ARTICLES ';
+
+            animateCardsIn(wrapper);
+
+            const scrollContainer = document.querySelector('#news .cards-scroll-container');
+            if (scrollContainer) scrollContainer.scrollLeft = 0;
+        });
+    });
+}
+
 /* ---------- Custom Scroll Track ---------- */
 function initCustomScrollTrack() {
     const scrollContainer = document.querySelector('#news .cards-scroll-container');
@@ -2873,7 +3001,7 @@ function initCustomScrollTrack() {
 
 document.addEventListener('DOMContentLoaded', initCustomScrollTrack);
 
-/* ---------- Article Card Click Handler ---------- */
+/* ---------- Article Card Click Handler (initial load) ---------- */
 document.querySelectorAll('#news .article-card').forEach(card => {
     card.addEventListener('click', () => {
         const url = card.dataset.href;
@@ -2922,7 +3050,7 @@ if (careersBtn) {
     });
 }
 
-/* ---------- CHANGE 1: Suppress link preview on team cards ---------- */
+/* ---------- Suppress link preview on team cards ---------- */
 document.querySelectorAll('.team-card').forEach(card => {
     card.addEventListener('click', function(e) {
         e.preventDefault();
