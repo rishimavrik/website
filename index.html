@@ -765,7 +765,7 @@ body.scroll-locked {
 
     .team-card-role { font-size: 9px !important; }
     .team-card-name { font-size: 13px !important; }
-    
+
     .team-card {
         background-position: center 15% !important;
     }
@@ -774,6 +774,13 @@ body.scroll-locked {
         background-position: center 15% !important;
     }
 
+    .team-card::before {
+        display: none;
+    }
+
+    .team-card:hover::before {
+        display: none;
+    }
     /* NEWS */
     #news {
         padding: 16px;
