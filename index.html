@@ -740,7 +740,7 @@ body.scroll-locked {
 
     /* TEAM PAGE - MOBILE */
     #team {
-        padding: 16px 16px 80px;
+        padding: 50px 16px 16px;
         height: auto;
         min-height: 100vh;
         min-height: 100dvh;
@@ -750,26 +750,18 @@ body.scroll-locked {
     #team .eagle {
         position: absolute;
         top: 16px; right: 16px; left: auto;
-        width: 28px;
+        width: 32px;
     }
 
-    .team-header {
-        margin-top: 44px;
-        margin-bottom: 12px;
-    }
-
-    .team-title { font-size: 20px; margin-bottom: 10px; }
-
-    .team-line {
-        max-width: 100%;
-    }
+    .team-header { margin-bottom: 16px; }
+    .team-title { font-size: 24px; }
 
     .team-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(5, 1fr) !important;
         gap: 10px !important;
         min-height: 600px;
-        padding-bottom: 0;
+        padding-bottom: 60px;
     }
 
     .team-card-role { font-size: 9px !important; }
@@ -790,7 +782,6 @@ body.scroll-locked {
     .team-card:hover::before {
         display: none;
     }
-
     /* NEWS */
     #news {
         padding: 16px;
@@ -844,6 +835,7 @@ body.scroll-locked {
 
     .card-image { flex: 1; min-height: 0; }
     .card-accent { height: 4px; flex-shrink: 0; }
+    /* CHANGE 1: fixed card-content vertical clipping on mobile */
     .card-content { min-height: 0; padding: 10px 12px; flex-shrink: 0; }
     .card-title { font-size: 13px; margin-bottom: 6px; line-height: 1.2; }
     .card-publication { font-size: 8px; }
@@ -935,20 +927,6 @@ body.scroll-locked {
     .hide-mobile { display: none; }
     .contact-footer-link { text-align: left; }
     .contact-footer-link::before { content: "•"; margin-right: 8px; opacity: 0.5; }
-
-    /* CAREERS BUTTON - MOBILE */
-    .careers-btn {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin: 20px 0 0 0;
-        justify-content: center;
-        font-size: 11px;
-        padding: 12px 20px;
-        width: 100%;
-        border: 1px solid rgba(255,255,255,0.3);
-    }
 }
 
 /* ---------- TEAM SECTION ---------- */
@@ -1391,6 +1369,7 @@ body.scroll-locked {
 
 .cards-scroll-container::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
+/* CHANGE 1: align-items stretch so cards fill height properly */
 .cards-wrapper {
     display: flex;
     gap: 28px;
@@ -1399,6 +1378,7 @@ body.scroll-locked {
     align-items: stretch;
 }
 
+/* CHANGE 1: min-height 0 so card can shrink on short viewports */
 .article-card {
     pointer-events: auto;
     position: relative;
@@ -1422,13 +1402,13 @@ body.scroll-locked {
 .article-card:nth-child(3) { animation-delay: 0.3s; }
 .article-card:nth-child(4) { animation-delay: 0.4s; }
 .article-card:nth-child(5) { animation-delay: 0.5s; }
-.article-card:nth-child(6) { animation-delay: 0.6s; }
 
 @keyframes cardReveal {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* CHANGE 1: min-height reduced so image doesn't force overflow on short screens */
 .card-image {
     position: relative;
     flex: 1;
@@ -1454,6 +1434,7 @@ body.scroll-locked {
 
 .article-card:hover .card-accent { height: 10px; }
 
+/* CHANGE 1: min-height 0 so content shrinks instead of clipping */
 .card-content {
     background: #212121;
     padding: 24px 22px;
@@ -1852,6 +1833,17 @@ body.scroll-locked {
 
 .careers-btn span { transition: transform 0.3s ease; }
 .careers-btn:hover span { transform: translate(4px, -4px); }
+
+@media (max-width: 768px) {
+    .careers-btn {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        justify-content: center;
+        font-size: 11px;
+        padding: 12px 20px;
+    }
+}
 </style>
 </head>
 <body>
@@ -2996,5 +2988,6 @@ document.querySelectorAll('.team-card').forEach(card => {
     });
 });
 </script>
+
 </body>
 </html>
