@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>MAVRIK - Careers</title>
 <meta property="og:title" content="MAVRIK — Careers">
 <meta property="og:description" content="Join the team building next-generation autonomous systems.">
 <meta property="og:url" content="https://mavrik.tech/careers">
 <meta property="og:type" content="website">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png">
 <style>
 /* ---------- RESET ---------- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -345,45 +346,67 @@ body {
 
 /* ---------- MOBILE ---------- */
 @media (max-width: 768px) {
-    html, body { overflow: auto; height: auto; }
+    html, body {
+        overflow: auto;
+        height: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
     .careers-page {
         height: auto;
         min-height: 100vh;
         min-height: 100dvh;
         overflow: visible;
+        display: flex;
+        flex-direction: column;
+        /* Keep content above iOS home indicator */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     .careers-main {
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto auto;
         min-height: auto;
+        flex: 1;
     }
 
     .careers-left {
         padding: 36px 20px 28px;
         border-right: none;
         border-bottom: 1px solid rgba(0,0,0,0.1);
+        justify-content: flex-start;
     }
 
     .careers-right {
         overflow: visible;
         min-height: auto;
+        display: flex;
+        flex-direction: column;
     }
 
     .jobs-fixed-header {
         padding: 24px 20px 0 20px;
+        /* Sit below Dynamic Island / notch */
         position: sticky;
-        top: 0;
+        top: env(safe-area-inset-top, 0px);
         background: #f1f1ec;
+        z-index: 10;
     }
 
     .eagle-corner { right: 20px; top: 16px; }
 
     .jobs-scroll {
-        padding: 0 20px 24px 20px;
+        /* Natural page scroll — no fixed height clipping */
         overflow-y: visible;
         flex: none;
+        padding: 0 20px;
+        /* Last job clears iOS home bar */
+        padding-bottom: calc(32px + env(safe-area-inset-bottom, 20px));
+    }
+
+    .jobs-list {
+        display: flex;
+        flex-direction: column;
     }
 
     .back-btn { margin-top: 28px; }
@@ -391,6 +414,7 @@ body {
 
     .careers-footer {
         padding: 18px 20px;
+        padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
         flex-direction: column;
         gap: 8px;
         text-align: center;
@@ -578,11 +602,6 @@ document.querySelectorAll('.job-item').forEach(item => {
         if (this._href) this.setAttribute('href', this._href);
     });
 });
-
-/* ---------- Prevent overscroll ---------- */
-document.addEventListener('touchmove', e => {
-    e.preventDefault();
-}, { passive: false });
 </script>
 
 </body>
