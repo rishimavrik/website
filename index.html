@@ -17,6 +17,7 @@
 <meta name="twitter:description" content="Helicopter capability. Drone economics.">
 <meta name="twitter:image" content="https://mavrik.tech/preview.png">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png">
 <style>
 /* ---------- RESET ---------- */
 * {
@@ -739,7 +740,7 @@ body.scroll-locked {
 
     /* TEAM PAGE - MOBILE */
     #team {
-        padding: 50px 16px 16px;
+        padding: 16px 16px 80px;
         height: auto;
         min-height: 100vh;
         min-height: 100dvh;
@@ -749,18 +750,26 @@ body.scroll-locked {
     #team .eagle {
         position: absolute;
         top: 16px; right: 16px; left: auto;
-        width: 32px;
+        width: 28px;
     }
 
-    .team-header { margin-bottom: 16px; }
-    .team-title { font-size: 24px; }
+    .team-header {
+        margin-top: 44px;
+        margin-bottom: 12px;
+    }
+
+    .team-title { font-size: 20px; margin-bottom: 10px; }
+
+    .team-line {
+        max-width: 100%;
+    }
 
     .team-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         grid-template-rows: repeat(5, 1fr) !important;
         gap: 10px !important;
         min-height: 600px;
-        padding-bottom: 60px;
+        padding-bottom: 0;
     }
 
     .team-card-role { font-size: 9px !important; }
@@ -781,6 +790,7 @@ body.scroll-locked {
     .team-card:hover::before {
         display: none;
     }
+
     /* NEWS */
     #news {
         padding: 16px;
@@ -834,7 +844,6 @@ body.scroll-locked {
 
     .card-image { flex: 1; min-height: 0; }
     .card-accent { height: 4px; flex-shrink: 0; }
-    /* CHANGE 1: fixed card-content vertical clipping on mobile */
     .card-content { min-height: 0; padding: 10px 12px; flex-shrink: 0; }
     .card-title { font-size: 13px; margin-bottom: 6px; line-height: 1.2; }
     .card-publication { font-size: 8px; }
@@ -926,6 +935,20 @@ body.scroll-locked {
     .hide-mobile { display: none; }
     .contact-footer-link { text-align: left; }
     .contact-footer-link::before { content: "•"; margin-right: 8px; opacity: 0.5; }
+
+    /* CAREERS BUTTON - MOBILE */
+    .careers-btn {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 20px 0 0 0;
+        justify-content: center;
+        font-size: 11px;
+        padding: 12px 20px;
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
 }
 
 /* ---------- TEAM SECTION ---------- */
@@ -1368,7 +1391,6 @@ body.scroll-locked {
 
 .cards-scroll-container::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
-/* CHANGE 1: align-items stretch so cards fill height properly */
 .cards-wrapper {
     display: flex;
     gap: 28px;
@@ -1377,7 +1399,6 @@ body.scroll-locked {
     align-items: stretch;
 }
 
-/* CHANGE 1: min-height 0 so card can shrink on short viewports */
 .article-card {
     pointer-events: auto;
     position: relative;
@@ -1401,13 +1422,13 @@ body.scroll-locked {
 .article-card:nth-child(3) { animation-delay: 0.3s; }
 .article-card:nth-child(4) { animation-delay: 0.4s; }
 .article-card:nth-child(5) { animation-delay: 0.5s; }
+.article-card:nth-child(6) { animation-delay: 0.6s; }
 
 @keyframes cardReveal {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* CHANGE 1: min-height reduced so image doesn't force overflow on short screens */
 .card-image {
     position: relative;
     flex: 1;
@@ -1433,7 +1454,6 @@ body.scroll-locked {
 
 .article-card:hover .card-accent { height: 10px; }
 
-/* CHANGE 1: min-height 0 so content shrinks instead of clipping */
 .card-content {
     background: #212121;
     padding: 24px 22px;
@@ -1832,17 +1852,6 @@ body.scroll-locked {
 
 .careers-btn span { transition: transform 0.3s ease; }
 .careers-btn:hover span { transform: translate(4px, -4px); }
-
-@media (max-width: 768px) {
-    .careers-btn {
-        bottom: 16px;
-        left: 16px;
-        right: 16px;
-        justify-content: center;
-        font-size: 11px;
-        padding: 12px 20px;
-    }
-}
 </style>
 </head>
 <body>
@@ -2094,7 +2103,7 @@ body.scroll-locked {
                 <source src="chorus.mp4" type="video/mp4">
             </video>
             <div class="detail-close detail-anim detail-anim-nav" onclick="closeDetail()">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http.w3.org/2000/svg">
                     <path d="M8 3L8 13M8 13L3 8M8 13L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
@@ -2317,6 +2326,31 @@ body.scroll-locked {
     <div class="news-content">
         <div class="cards-scroll-container">
             <div class="cards-wrapper">
+
+                <!-- Card 0: MAVRIK Awarded $2M SBIR -->
+                <div class="article-card"
+                   data-color="teal"
+                   data-href="https://www.linkedin.com/pulse/mavrik-secures-2m-us-army-sbir-advance-autonomous-heavy-lift-vuydc?trackingId=wdljOL6cRjixXBpPNmkhcw%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BoXZ8%2Fnt6ToyA%2BLRzYV%2Bu%2Fg%3D%3D">
+                    <div class="card-image">
+                        <img src="sbir.png" alt="MAVRIK Awarded $2M SBIR">
+                    </div>
+                    <div class="card-accent"></div>
+                    <div class="card-content">
+                        <div>
+                            <h3 class="card-title">MAVRIK Awarded $2M SBIR</h3>
+                            <div class="card-meta">
+                                <span class="card-publication">LinkedIn</span>
+                                <span class="card-author">MAVRIK</span>
+                                <span class="card-date">02/26/26</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-arrow">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
 
                 <!-- Card 1: Golden Hour -->
                 <div class="article-card"
@@ -2821,130 +2855,11 @@ function downloadSlickSheet(filename) {
     document.body.removeChild(a);
 }
 
-/* ---------- Our Articles Toggle ---------- */
-const externalArticlesData = [
-    {
-        color: 'orange',
-        href: 'https://www.businessinsider.com/us-warned-golden-hour-save-soldiers-threatened-russia-ukraine-lost-2024-12',
-        image: 'golden-hour.png', alt: 'Golden Hour',
-        title: 'Golden Hour',
-        publication: 'Business Insider', author: 'Baker and Pickrell', date: '2024'
-    },
-    {
-        color: 'magenta',
-        href: 'https://www.army.mil/article/272922/contested_logistics_environment_defined',
-        image: 'contested-logistics.png', alt: 'Contested Logistics',
-        title: 'Contested Logistics',
-        publication: 'U.S. Army', author: 'Maj. King', date: '2024'
-    },
-    {
-        color: 'purple',
-        href: 'https://www.army.mil/article/228814/achieving_simultaneity_of_logistics_and_sustainment_on_the_decisive_action_battlefield_an_essentia',
-        image: 'battlefield-logistics.png', alt: 'Battlefield Logistics',
-        title: 'Battlefield Logistics',
-        publication: 'U.S. Army', author: 'Lt. Col. Mike Hammond', date: '2019'
-    },
-    {
-        color: 'burgundy',
-        href: 'https://www.doi.gov/sites/doi.gov/files/uploads/doi_uas_background_info_paper_gamechanger_the_promise_of_optionally-piloted_helicopters_in_wildland_fire_08_2018.pdf',
-        image: 'optionally-piloted-helicopters.png', alt: 'Optionally Piloted Helicopters',
-        title: 'Optionally Piloted Helicopters',
-        publication: 'U.S. D.O.I.', author: 'Department of Interior', date: '2018'
-    },
-    {
-        color: 'teal',
-        href: 'https://web.stanford.edu/group/scpnt/pnt/PNT09/student_posters/4_Smith_Heavy_Lift_Helicopter.pdf',
-        image: 'heavy-lift-helicopter-teams.png', alt: 'Heavy Lift Helicopter Teams',
-        title: 'Heavy Lift Helicopter Teams',
-        publication: 'Stanford University', author: 'Smith', date: '2011'
-    }
-];
-
-const ourArticlesData = [
-    {
-        color: 'teal',
-        href: 'https://www.linkedin.com/pulse/mavrik-secures-2m-us-army-sbir-advance-autonomous-heavy-lift-vuydc?trackingId=wdljOL6cRjixXBpPNmkhcw%3D%3D&lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BoXZ8%2Fnt6ToyA%2BLRzYV%2Bu%2Fg%3D%3D',
-        image: 'sbir.png', alt: 'MAVRIK Awarded $2M SBIR',
-        title: 'MAVRIK Awarded $2M SBIR',
-        publication: 'LinkedIn', author: 'MAVRIK', date: '02/26/26'
-    }
-];
-
-let showingOurArticles = false;
-
-function buildCards(data) {
-    const arrowSVG = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    return data.map(d => `
-        <div class="article-card" data-color="${d.color}" data-href="${d.href}" style="opacity:0;transform:translateY(30px);">
-            <div class="card-image"><img src="${d.image}" alt="${d.alt}"></div>
-            <div class="card-accent"></div>
-            <div class="card-content">
-                <div>
-                    <h3 class="card-title">${d.title}</h3>
-                    <div class="card-meta">
-                        <span class="card-publication">${d.publication}</span>
-                        <span class="card-author">${d.author}</span>
-                        <span class="card-date">${d.date}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-arrow">${arrowSVG}</div>
-        </div>
-    `).join('');
-}
-
-function attachCardClickHandlers(wrapper) {
-    wrapper.querySelectorAll('.article-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const url = card.dataset.href;
-            if (url) window.open(url, '_blank');
-        });
-    });
-}
-
-function animateCardsIn(wrapper) {
-    const cards = wrapper.querySelectorAll('.article-card');
-    cards.forEach((card, i) => {
-        setTimeout(() => {
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, i * 100);
-    });
-}
-
-function animateCardsOut(wrapper, callback) {
-    const cards = wrapper.querySelectorAll('.article-card');
-    cards.forEach((card, i) => {
-        card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-        card.style.transitionDelay = `${i * 60}ms`;
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-    });
-    setTimeout(callback, cards.length * 60 + 380);
-}
-
+/* ---------- OUR ARTICLES — links to LinkedIn ---------- */
 const ourArticlesBtn = document.querySelector('#news .our-articles-btn');
 if (ourArticlesBtn) {
     ourArticlesBtn.addEventListener('click', () => {
-        const wrapper = document.querySelector('#news .cards-wrapper');
-        if (!wrapper) return;
-
-        animateCardsOut(wrapper, () => {
-            showingOurArticles = !showingOurArticles;
-            const newData = showingOurArticles ? ourArticlesData : externalArticlesData;
-            wrapper.innerHTML = buildCards(newData);
-            attachCardClickHandlers(wrapper);
-
-            // Update button label — replace text node only, keep the SVG span
-            const btn = document.querySelector('#news .our-articles-btn');
-            btn.childNodes[0].textContent = showingOurArticles ? 'READ ME ' : 'OUR ARTICLES ';
-
-            animateCardsIn(wrapper);
-
-            const scrollContainer = document.querySelector('#news .cards-scroll-container');
-            if (scrollContainer) scrollContainer.scrollLeft = 0;
-        });
+        window.open('https://www.linkedin.com/company/mavrikinc/posts/?feedView=articles', '_blank', 'noopener,noreferrer');
     });
 }
 
