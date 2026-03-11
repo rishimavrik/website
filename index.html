@@ -167,6 +167,9 @@ section {
     left: 32px;
     bottom: 80px;
     width: clamp(500px, 70vw, 1100px);
+    max-height: clamp(95px, 13.3vw, 208px); /* matches old logo's rendered height */
+    object-fit: contain;
+    object-position: left bottom;
     display: block;
     z-index: 2;
 }
@@ -1845,6 +1848,44 @@ body.scroll-locked {
         padding: 12px 20px;
     }
 }
+
+/* ---------- ANNOUNCEMENT BANNER ---------- */
+.announcement-banner {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #DFFC1E;
+    color: #212121;
+    text-align: center;
+    padding: 10px 32px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    z-index: 3;
+    line-height: 1.4;
+}
+
+.announcement-banner a.press-release-link {
+    color: #212121;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.announcement-banner a.press-release-link:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .announcement-banner {
+        top: 70px;
+        font-size: 9px;
+        padding: 8px 16px;
+        letter-spacing: 0.1em;
+    }
+}
 </style>
 </head>
 <body>
@@ -1866,6 +1907,10 @@ body.scroll-locked {
         </div>
     </nav>
 
+    <!-- ANNOUNCEMENT BANNER -->
+    <div class="announcement-banner">
+        MAVRIK IS PLEASED TO ANNOUNCE WE HAVE BEEN ACQUIRED BY HAVOC.&nbsp; TO LEARN MORE,&nbsp;<a class="press-release-link" href="https://www.tectonicdefense.com/exclusive-havocais-all-domain-shopping-spree/" target="_blank" rel="noopener noreferrer">READ THE PRESS RELEASE.</a>
+    </div>
     <img src="logo-eagle.png" class="eagle" alt="Eagle Logo">
 
     <!-- MAVRIK LOGO -->
